@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Return of Maximalism in Indian Weddings | The Journal | Bhakti Decor</title>
+    <meta name="description"
+        content="Read how bold colors like emerald green and royal blue are replacing neutrals in Indian wedding decor, and how to style maximalist paper installations.">
+    <link rel="canonical" href="https://www.bhaktidecor.com/journal/maximalism-indian-weddings">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,400;12..96,600;12..96,800&family=Montserrat:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+
+    <style>
+        /* --- 1. SHARED VARIABLES --- */
+        :root {
+            --bg-body: #0a0a0a;
+            --bg-card: #141414;
+            --bg-accent: #1f1f1f;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --gold: #D4AF37;
+            --font-head: 'Bricolage Grotesque', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+            /* Adding a serif font for richer article reading experience */
+            --font-article: 'Lora', serif;
+            --spacing-section: 100px;
+        }
+
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-head);
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        /* --- 2. UTILITY & NAV (UPDATED HEIGHT) --- */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .gold {
+            color: var(--gold);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 0.5rem 3rem;
+            /* Reduced Height */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            z-index: 102;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Mobile Menu Toggle & Overlay */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 102;
+        }
+
+        .bar {
+            width: 30px;
+            height: 2px;
+            background-color: white;
+            transition: 0.3s;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-body);
+            z-index: 101;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .mobile-overlay.active {
+            transform: translateY(0);
+        }
+
+        .mobile-links {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            color: white;
+        }
+
+
+        /* --- 3. ARTICLE HERO --- */
+        .article-hero {
+            padding: 180px 0 80px 0;
+            text-align: center;
+        }
+
+        .meta-header {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .article-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-image-wrapper {
+            height: 600px;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 4rem;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- 4. ARTICLE CONTENT --- */
+        .article-body {
+            font-family: var(--font-article);
+            font-size: 1.2rem;
+            color: #ccc;
+            line-height: 1.8;
+            padding-bottom: var(--spacing-section);
+        }
+
+        .article-body p {
+            margin-bottom: 2rem;
+        }
+
+        .article-body h2 {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            color: white;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-body h3 {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            color: white;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-quote {
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--gold);
+            text-align: center;
+            margin: 4rem 0;
+            padding: 0 2rem;
+            border-left: 3px solid var(--gold);
+            border-right: 3px solid var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid #222;
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+
+            /* Mobile Nav triggers */
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .article-hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-image-wrapper {
+                height: 400px;
+            }
+
+            .article-body {
+                font-size: 1.1rem;
+            }
+
+            .highlight-quote {
+                font-size: 1.5rem;
+                border: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="/" class="logo">BHAKTI<span class="gold">.</span></a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/shop">Shop</a>
+            <a href="/wholesale">Wholesale</a>
+            <a href="/bespoke">Bespoke</a>
+            <!-- <a href="/journal" class="gold">Journal</a> -->
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+        <a href="/" class="mobile-links" onclick="toggleMenu()">Home</a>
+        <a href="/shop" class="mobile-links" onclick="toggleMenu()">Shop</a>
+        <a href="/wholesale" class="mobile-links" onclick="toggleMenu()">Wholesale</a>
+        <a href="/bespoke" class="mobile-links" onclick="toggleMenu()">Bespoke</a>
+        <!-- <a href="/journal" class="mobile-links" onclick="toggleMenu()">Journal</a> -->
+        <a href="/about" class="mobile-links" onclick="toggleMenu()">About</a>
+        <a href="/contact" class="mobile-links" onclick="toggleMenu()">Contact</a>
+    </div>
+
+    <article>
+        <header class="article-hero">
+            <div class="container">
+                <span class="meta-header">Weddings   |   Jan 22, 2026   |   By Priya Sharma</span>
+                <h1>The Return of Maximalism in Indian Weddings</h1>
+            </div>
+        </header>
+
+        <div class="hero-image-wrapper">
+            <img src="https://placehold.co/1600x900/181818/444?text=Maximalist+Wedding+Setup"
+                alt="Maximalist Wedding Decor">
+        </div>
+
+        <div class="container-narrow article-body">
+            <p>For the past five years, the wedding industry has been dominated by the 'blush and beige' aesthetic.
+                Minimalist mandaps, ghost chairs, and whisper-soft florals defined luxury. But as we move into a new
+                season of celebration, the pendulum is swinging back. Maximalism—rich, opulent, and unapologetically
+                bold—is returning to the forefront of Indian weddings.</p>
+
+            <h2>More is More, But Make it Curated</h2>
+            <p>Modern maximalism is not about clutter; it's about intentional abundance. It's about layering textures
+                and deep, saturated colors to create an immersive experience for guests. It is a rejection of the
+                understated in favor of the unforgettable.</p>
+
+            <div class="highlight-quote">
+                "Clients are tired of playing it safe. They want their decor to feel like an embrace—warm, rich, and
+                full of life."
+            </div>
+
+            <p>At Bhakti Decor, we are seeing a massive surge in demand for our jewel-tone collections. The deep
+                emeralds, sapphire blues, and ruby reds that define traditional Indian royalty are being reimagined
+                through contemporary paper artistry.</p>
+
+            <h2>The Role of Paper Installations</h2>
+            <p>How do you achieve a maximalist look without it feeling heavy or dated? The answer lies in the medium.
+                Traditional maximalism relied heavily on dense floral arrangements and heavy drapes. Today, large-scale
+                paper installations offer the same visual impact but with a sense of airiness and modernity.</p>
+
+            <p>Our giant honeycomb spheres, dusted with our signature antique gold finish, are being clustered together
+                to create massive overhead canopies that replace traditional floral ceilings. They catch the light
+                beautifully, creating drama without the physical weight.</p>
+
+            <h3>Structuring the Palette</h3>
+            <p>To pull off this look, we recommend anchoring the space with two deep primary colors—for instance, a
+                midnight blue and forest green—and using metallic gold paper elements as the neutral tie-in. This
+                creates a rich tapestry that feels luxurious rather than chaotic.</p>
+            <p>As we embrace this shift, we invite you to explore our 'Royal collection' and see how intentional
+                layering can transform your venue into a palace of color.</p>
+
+        </div>
+    </article>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Bhakti Decor. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script>
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true })
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf) }
+        requestAnimationFrame(raf)
+
+        function toggleMenu() { document.getElementById('mobileOverlay').classList.toggle('active'); }
+    </script>
+
+</body>
+
+</html>
