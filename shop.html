@@ -56,6 +56,11 @@
             overflow-x: hidden;
         }
 
+        /* Utility class to stop scrolling */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
         h1,
         h2,
         h3 {
@@ -248,14 +253,19 @@
             position: relative;
             height: 480px;
             overflow: hidden;
-            background: #111;
+            background: #ffffff;
+            /* White background for PNGs */
             margin-bottom: 1.2rem;
+            cursor: pointer;
+            border-radius: 8px;
         }
 
         .product-img-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            background-color: #ffffff;
+            /* White background for PNGs */
             transition: transform 0.8s var(--transition-smooth);
         }
 
@@ -278,19 +288,17 @@
             display: block;
         }
 
+        /* Fixed Title Truncation */
         .product-title {
             font-size: 1.25rem;
-            margin-bottom: 0.3rem;
+            margin-bottom: 1rem;
             color: white;
             font-weight: 500;
-        }
-
-        .product-price {
-            color: var(--gold);
-            font-size: 1.1rem;
-            font-weight: 500;
-            display: block;
-            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            padding: 0 10px;
         }
 
         .whatsapp-btn {
@@ -308,6 +316,7 @@
             width: 100%;
             transition: 0.3s;
             gap: 8px;
+            border-radius: 4px;
         }
 
         .whatsapp-btn:hover {
@@ -324,6 +333,258 @@
 
         .whatsapp-btn:hover .whatsapp-icon {
             color: var(--gold);
+        }
+
+        /* --- AWARD WINNING PRODUCT DIALOG --- */
+        .product-dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 100000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 20px;
+        }
+
+        .product-dialog-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .product-dialog-content {
+            position: relative;
+            width: 1000px;
+            max-width: 95vw;
+            max-height: 90vh;
+            background: #0d0d0d;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            transform: translateY(20px) scale(0.98);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-dialog-overlay.active .product-dialog-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .product-dialog-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-dialog-close:hover {
+            background: var(--gold);
+            color: black;
+            border-color: var(--gold);
+            transform: rotate(90deg);
+        }
+
+        /* Left Column: Image Gallery */
+        .dialog-image-col {
+            width: 50%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .dialog-image-col::-webkit-scrollbar {
+            display: none;
+        }
+
+        .dialog-main-img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .dialog-thumbnails {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .dialog-thumbnails img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s;
+            opacity: 0.5;
+        }
+
+        .dialog-thumbnails img:hover,
+        .dialog-thumbnails img.active {
+            border-color: #000;
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        /* Right Column: Details */
+        .dialog-info-col {
+            width: 50%;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            /* This enables scrolling */
+            text-align: left;
+            overscroll-behavior: contain;
+            /* Prevents the background from scrolling when you reach the end */
+            -webkit-overflow-scrolling: touch;
+            /* Better scrolling for mobile/trackpads */
+        }
+
+        /* Custom Scrollbar for Info Column */
+        .dialog-info-col::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .dialog-info-col::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .dialog-info-col::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .dialog-info-col::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .dialog-cat {
+            color: var(--gold);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .dialog-title {
+            color: white;
+            margin: 0 0 20px 0;
+            font-size: 2.2rem;
+            font-family: var(--font-head);
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .dialog-meta-flex {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #d4d4d8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .dialog-desc-wrapper {
+            margin-bottom: 40px;
+        }
+
+        .dialog-desc-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #71717a;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .dialog-desc {
+            color: #a1a1aa;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-family: var(--font-body);
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .dialog-action {
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .dialog-whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--gold);
+            color: #000;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 32px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-family: var(--font-body);
+        }
+
+        .dialog-whatsapp-btn:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .dialog-whatsapp-btn i {
+            font-size: 1.4rem;
         }
 
         footer {
@@ -352,6 +613,38 @@
 
             .shop-header h1 {
                 font-size: 3.5rem;
+            }
+
+            .product-dialog-content {
+                flex-direction: column;
+                overflow-y: auto;
+            }
+
+            .dialog-image-col {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 30px;
+            }
+
+            .dialog-info-col {
+                width: 100%;
+                padding: 40px 30px;
+            }
+
+            .dialog-main-img {
+                max-height: 40vh;
+            }
+
+            .dialog-title {
+                font-size: 1.8rem;
+            }
+
+            .product-dialog-close {
+                top: 16px;
+                right: 16px;
+                background: rgba(0, 0, 0, 0.5);
+                border-color: rgba(255, 255, 255, 0.2);
             }
         }
 
@@ -386,6 +679,14 @@
             .product-title {
                 font-size: 0.95rem;
             }
+
+            .dialog-image-col {
+                padding: 20px;
+            }
+
+            .dialog-info-col {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
@@ -399,23 +700,21 @@
             <a href="/shop" class="gold">Shop</a>
             <a href="/wholesale">Wholesale</a>
             <a href="/bespoke">Bespoke</a>
-            <!-- <a href="/journal">Journal</a> -->
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
         </div>
-        <div class="menu-toggle" onclick="toggleMenu()">
+        <div class="menu-toggle" onclick="window.toggleMenu()">
             <span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
         </div>
     </nav>
 
     <div class="mobile-overlay" id="mobileOverlay">
-        <a href="/" class="mobile-links" onclick="toggleMenu()">Home</a>
-        <a href="/shop" class="mobile-links" onclick="toggleMenu()">Shop</a>
-        <a href="/wholesale" class="mobile-links" onclick="toggleMenu()">Wholesale</a>
-        <a href="/bespoke" class="mobile-links" onclick="toggleMenu()">Bespoke</a>
-        <!-- <a href="/journal" class="mobile-links" onclick="toggleMenu()">Journal</a> -->
-        <a href="/about" class="mobile-links" onclick="toggleMenu()">About</a>
-        <a href="/contact" class="mobile-links" onclick="toggleMenu()">Contact</a>
+        <a href="/" class="mobile-links" onclick="window.toggleMenu()">Home</a>
+        <a href="/shop" class="mobile-links" onclick="window.toggleMenu()">Shop</a>
+        <a href="/wholesale" class="mobile-links" onclick="window.toggleMenu()">Wholesale</a>
+        <a href="/bespoke" class="mobile-links" onclick="window.toggleMenu()">Bespoke</a>
+        <a href="/about" class="mobile-links" onclick="window.toggleMenu()">About</a>
+        <a href="/contact" class="mobile-links" onclick="window.toggleMenu()">Contact</a>
     </div>
 
     <header class="shop-header">
@@ -424,18 +723,16 @@
             <p>Select pieces available for immediate dispatch. For custom colors, please visit our Bespoke section.</p>
 
             <ul class="filters" id="filterContainer">
-                <li><button class="filter-link active" onclick="filterProducts('View All', this)">View All</button></li>
-                <li><button class="filter-link" onclick="filterProducts('Honeycombs', this)">Honeycombs</button></li>
-                <li><button class="filter-link" onclick="filterProducts('Lanterns', this)">Lanterns</button></li>
-                <li><button class="filter-link" onclick="filterProducts('Festive Kits', this)">Festive Kits</button>
-                </li>
-                <li><button class="filter-link" onclick="filterProducts('Fans', this)">Fans</button></li>
+                <li><button class="filter-link active" onclick="window.filterProducts('View All', this)">Loading
+                        Filters...</button></li>
             </ul>
         </div>
     </header>
 
     <section class="container">
         <div class="shop-grid" id="shopGrid">
+            <p style='text-align:center; grid-column: 1/-1; color: var(--text-muted);'>Fetching the latest collection...
+            </p>
         </div>
     </section>
 
@@ -445,57 +742,108 @@
         </div>
     </footer>
 
+    <div class="product-dialog-overlay" id="productDialog" onclick="window.closeProductModal(event)">
+        <div class="product-dialog-content" id="productDialogDynamicContent" onclick="event.stopPropagation()">
+        </div>
+    </div>
+
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // Obfuscated config keys to prevent easy copying from DevTools inspect
+        const firebaseConfig = {
+            apiKey: atob("QUl6YVN5QUoxU2VCZ05falNxMXgxUU9CQmVpcUR1SVpKcTliMDUw"),
+            authDomain: atob("Ymhha3RpLWRlY29yLmZpcmViYXNlYXBwLmNvbQ=="),
+            projectId: atob("Ymhha3RpLWRlY29y"),
+            messagingSenderId: atob("Mjg4MTU5NTA2ODgx"),
+            appId: atob("MToyODgxNTk1MDY4ODE6d2ViOjg4ZDY2NDA2YzA2NGFmOWNlZWNmNDA=")
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         let allProducts = [];
 
-        // --- 1. FETCH DATA FROM JSON ---
+        // --- 1. FETCH DATA FROM FIREBASE ---
         async function loadProducts() {
             try {
-                const response = await fetch('./assets/json/products.json');
-                allProducts = await response.json();
+                const q = query(collection(db, "products"), where("isActive", "==", true));
+                const querySnapshot = await getDocs(q);
 
-                // Initial render: Shuffle all for "View All"
+                allProducts = [];
+                const uniqueCategories = new Set();
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+
+                    // Support multiple categories
+                    const itemCats = data.categories || (data.category ? [data.category] : ['Uncategorized']);
+                    itemCats.forEach(c => uniqueCategories.add(c));
+
+                    allProducts.push({
+                        id: doc.id,
+                        title: data.name,
+                        categories: itemCats,
+                        primaryCat: itemCats[0],
+                        description: data.description || '',
+                        gsm: data.gsm || '',
+                        images: data.images && data.images.length > 0 ? data.images : ['https://via.placeholder.com/400x600?text=No+Image'],
+                        img: data.images && data.images.length > 0 ? data.images[0] : 'https://via.placeholder.com/400x600?text=No+Image'
+                    });
+                });
+
+                renderFilters(Array.from(uniqueCategories));
                 renderProducts(shuffleArray([...allProducts]));
             } catch (error) {
                 console.error("Error loading products:", error);
-                document.getElementById('shopGrid').innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>Failed to load collection. Please try again later.</p>";
+                document.getElementById('shopGrid').innerHTML = "<p style='text-align:center; grid-column: 1/-1; color: red;'>Failed to load collection. Please try again later.</p>";
             }
         }
 
-        // --- 2. RENDER ENGINE ---
+        // --- 2. RENDER DYNAMIC FILTERS ---
+        function renderFilters(categories) {
+            const filterContainer = document.getElementById('filterContainer');
+            filterContainer.innerHTML = `<li><button class="filter-link active" onclick="window.filterProducts('View All', this)">View All</button></li>`;
+
+            categories.sort().forEach(category => {
+                filterContainer.innerHTML += `<li><button class="filter-link" onclick="window.filterProducts('${category}', this)">${category}</button></li>`;
+            });
+        }
+
+        // --- 3. RENDER ENGINE ---
         function renderProducts(productList) {
             const grid = document.getElementById('shopGrid');
-            grid.innerHTML = ''; // Clear current grid
+            grid.innerHTML = '';
+
+            if (productList.length === 0) {
+                grid.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>No products found in this category.</p>";
+                return;
+            }
 
             productList.forEach((product, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
 
-                // Add a slight delay to each card for a staggered entrance effect
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
                 card.style.transitionDelay = `${(index % 12) * 0.05}s`;
 
+                // Card with single line title and no price
                 card.innerHTML = `
-                <div class="product-img-wrapper">
+                <div class="product-img-wrapper" onclick="window.openProductModal('${product.id}')">
                     <img src="${product.img}" alt="${product.title}" loading="lazy">
                 </div>
                 <div class="product-details">
-                    <span class="product-cat">${product.cat}</span>
-                    <h3 class="product-title">${product.title}</h3>
-                    <span class="product-price">₹ ${parseInt(product.price).toLocaleString('en-IN')}.00</span>
-                    <div class="whatsapp-btn-container">
-                        <button class="whatsapp-btn" onclick="buyOnWhatsapp('${product.title}', '${product.img}')">
-                            <i class="fi fi-brands-whatsapp whatsapp-icon"></i> Inquire
-                        </button>
-                    </div>
+                    <span class="product-cat">${product.primaryCat}</span>
+                    <h3 class="product-title" title="${product.title}">${product.title}</h3>
                 </div>
-            `;
+                `;
                 grid.appendChild(card);
 
-                // Trigger animation
                 requestAnimationFrame(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
@@ -503,19 +851,18 @@
             });
         }
 
-        // --- 3. FILTER & SHUFFLE LOGIC ---
-        function filterProducts(category, btnElement) {
-            // Update Active UI
+        // --- 4. FILTER & SHUFFLE LOGIC ---
+        window.filterProducts = function (category, btnElement) {
             document.querySelectorAll('.filter-link').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
 
             if (category === 'View All') {
                 renderProducts(shuffleArray([...allProducts]));
             } else {
-                const filtered = allProducts.filter(p => p.cat === category);
+                const filtered = allProducts.filter(p => p.categories.includes(category));
                 renderProducts(filtered);
             }
-        }
+        };
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -525,20 +872,97 @@
             return array;
         }
 
-        // --- 4. UTILITIES ---
-        function buyOnWhatsapp(productName, productImage) {
-            const phoneNumber = "919714154356";
-            const message = `Hello Bhakti Decor, I am interested in: %0A*Product:* ${productName}%0A*Ref:* ${productImage}`;
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-        }
+        // --- 5. EDITORIAL MODAL ENGINE ---
+        window.openProductModal = function (id) {
+            const product = allProducts.find(p => p.id === id);
+            if (!product) return;
 
-        function toggleMenu() { document.getElementById('mobileOverlay').classList.toggle('active'); }
+            const modal = document.getElementById('productDialog');
+            const contentArea = document.getElementById('productDialogDynamicContent');
 
-        // Initialize
+            // Generate Thumbnails
+            let thumbHtml = '';
+            if (product.images && product.images.length > 1) {
+                product.images.forEach((imgUrl, idx) => {
+                    const activeClass = idx === 0 ? 'active' : '';
+                    thumbHtml += `<img src="${imgUrl}" class="${activeClass}" onclick="window.updateDialogMainImg(this, '${imgUrl}')">`;
+                });
+            }
+
+            // Generate GSM Badge
+            let gsmHtml = '';
+            if (product.gsm && product.gsm.trim() !== "") {
+                gsmHtml = `<span class="meta-badge">GSM: ${product.gsm}</span>`;
+            }
+
+            // Format Description (Respect line breaks)
+            const descText = product.description ? product.description.replace(/\n/g, '<br>') : 'No description available for this item.';
+
+            // Inject Split Layout Content
+            // Inside window.openProductModal, change the contentArea.innerHTML injection to this:
+
+            contentArea.innerHTML = `
+    <button class="product-dialog-close" onclick="window.closeProductModal()">&times;</button>
+    <div class="dialog-image-col">
+        <img src="${product.img}" id="dialogMainImg" class="dialog-main-img" alt="${product.title}">
+        ${thumbHtml ? `<div class="dialog-thumbnails">${thumbHtml}</div>` : ''}
+    </div>
+    <div class="dialog-info-col" data-lenis-prevent> 
+        <span class="dialog-cat">${product.primaryCat}</span>
+        <h2 class="dialog-title">${product.title}</h2>
+        
+        ${gsmHtml ? `<div class="dialog-meta-flex">${gsmHtml}</div>` : ''}
+        
+        <div class="dialog-desc-wrapper">
+            <span class="dialog-desc-label">About this piece</span>
+            <p class="dialog-desc">${descText}</p>
+        </div>
+        
+        <div class="dialog-action">
+            <button class="dialog-whatsapp-btn" onclick="window.buyOnWhatsapp('${product.title.replace(/'/g, "\\'")}', '${product.img}')">
+                <i class="fi fi-brands-whatsapp"></i> Inquire Now
+            </button>
+        </div>
+    </div>
+`;
+            // Lock background scrolling
+            document.body.classList.add('no-scroll');
+            if (window.lenis) window.lenis.stop();
+
+            modal.classList.add('active');
+        };
+
+        window.updateDialogMainImg = function (element, src) {
+            document.getElementById('dialogMainImg').src = src;
+            document.querySelectorAll('.dialog-thumbnails img').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        };
+
+        window.closeProductModal = function (event) {
+            if (!event || event.target.id === 'productDialog' || event.target.className.includes('product-dialog-close')) {
+                document.getElementById('productDialog').classList.remove('active');
+                document.body.classList.remove('no-scroll');
+                if (window.lenis) window.lenis.start();
+            }
+        };
+
+        // --- 6. WHATSAPP UTILITY ---
+        window.buyOnWhatsapp = function (productName, productImage) {
+            const phoneNumber = "918238772094";
+            const message = `Hello Bhakti Decor, I am interested in:\n\n*Product:* ${productName}\n*Image:* ${productImage}`;
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        };
+
+        window.toggleMenu = function () {
+            document.getElementById('mobileOverlay').classList.toggle('active');
+        };
+
+        // Initialize Fetching
         document.addEventListener('DOMContentLoaded', loadProducts);
 
-        // Lenis Smooth Scroll (Optional, but kept for your styling)
+        // Lenis Smooth Scroll Setup
         const lenis = new Lenis();
+        window.lenis = lenis; // Attach to window so modal can pause it
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
     </script>
