@@ -4,34 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wholesale Collection | Premium Paper Decor | Bhakti Decor</title>
 
-    <title>The Collection | Shop Premium Paper Decor | Bhakti Decor</title>
-    <meta name="description"
-        content="Browse our curated collection of premium paper honeycombs, lanterns, stars, and festive kits. Available for immediate dispatch. Handcrafted luxury for your celebrations.">
-    <meta name="keywords"
-        content="buy paper decor online, honeycomb balls, paper lanterns, festive decoration kits, minimalist paper fans, christmas stars, luxury party supplies">
-    <link rel="canonical" href="https://www.bhaktidecor.com/shop">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,800&family=Montserrat:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel='stylesheet'
-        href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-brands/css/uicons-brands.css'>
 
     <style>
-        /* --- 1. SHARED VARIABLES --- */
+        /* CORE VARIABLES */
         :root {
-            --bg-body: #0a0a0a;
-            --bg-card: #141414;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --text-dark-muted: #666666;
-            --gold: #D4AF37;
-            --font-head: 'Bricolage Grotesque', sans-serif;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F4F4F4;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --text-light: #999999;
+            --accent: #B89768;
+            --border: rgba(0, 0, 0, 0.08);
+            --font-head: 'Syne', sans-serif;
             --font-body: 'Montserrat', sans-serif;
-            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         html.lenis {
@@ -48,25 +40,30 @@
             box-sizing: border-box;
         }
 
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            line-height: 1.7;
-            overflow-x: hidden;
+        body,
+        a,
+        button,
+        .menu-toggle,
+        select {
+            cursor: none !important;
         }
 
-        /* Utility class to stop scrolling */
-        body.no-scroll {
-            overflow: hidden;
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         h1,
         h2,
-        h3 {
+        h3,
+        h4,
+        .font-head {
             font-family: var(--font-head);
-            font-weight: 600;
-            letter-spacing: -0.02em;
+            font-weight: 700;
         }
 
         a {
@@ -76,74 +73,125 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 90vw;
             margin: 0 auto;
-            padding: 0 2rem;
         }
 
-        .gold {
-            color: var(--gold);
+        .text-accent {
+            color: var(--accent);
         }
 
-        /* --- NAV --- */
+        /* CUSTOM CURSOR */
+        .cursor-dot,
+        .cursor-circle {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .cursor-circle {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(184, 151, 104, 0.5);
+            border-radius: 50%;
+            transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+        }
+
+        .cursor-hover {
+            width: 70px;
+            height: 70px;
+            background: rgba(184, 151, 104, 0.1);
+            border-color: transparent;
+        }
+
+        /* NAVIGATION */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 0.5rem 3rem;
+            padding: 1.5rem 5vw;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
         }
 
         .logo {
-            font-family: var(--font-head);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            z-index: 102;
+            letter-spacing: -1px;
+            font-family: var(--font-head);
         }
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2.5rem;
         }
 
         .nav-links a {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 4px;
         }
 
-        .nav-links a:hover {
-            color: var(--gold);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
         }
 
         .menu-toggle {
             display: none;
             flex-direction: column;
             gap: 6px;
-            cursor: pointer;
             z-index: 102;
+            padding: 10px;
         }
 
         .bar {
             width: 30px;
             height: 2px;
-            background-color: white;
+            background-color: var(--text-main);
             transition: 0.3s;
         }
 
+        /* MOBILE MENU */
         .mobile-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: var(--bg-body);
+            background: linear-gradient(135deg, var(--text-main) 0%, #1a1a1a 100%);
             z-index: 101;
             display: flex;
             flex-direction: column;
@@ -151,448 +199,239 @@
             align-items: center;
             gap: 2rem;
             transform: translateY(-100%);
-            transition: transform 0.5s var(--transition-smooth);
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .mobile-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--accent) 1.5px, transparent 1.5px);
+            background-size: 35px 35px;
+            opacity: 0.07;
+            pointer-events: none;
         }
 
         .mobile-overlay.active {
             transform: translateY(0);
         }
 
-        .mobile-links {
-            font-family: var(--font-head);
-            font-size: 2rem;
-            color: white;
+        .menu-close {
+            position: absolute;
+            top: 2rem;
+            right: 5vw;
+            font-size: 2.5rem;
+            color: var(--bg-primary);
+            font-family: var(--font-body);
+            font-weight: 300;
+            transition: transform 0.4s ease, color 0.3s;
         }
 
-        /* --- HEADER & FILTERS --- */
+        .menu-close:hover {
+            transform: rotate(90deg);
+            color: var(--accent);
+        }
+
+        .mobile-link-wrapper {
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mobile-links {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--bg-primary);
+            display: block;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .mobile-overlay.active .mobile-links {
+            transform: translateY(0);
+        }
+
+        .mobile-links:hover {
+            color: var(--accent);
+        }
+
+        /* HEADER */
         .shop-header {
-            padding: 180px 0 80px 0;
+            padding: 20vh 0 5vh 0;
             text-align: center;
         }
 
         .shop-header h1 {
-            font-size: 4.5rem;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            line-height: 1;
+            letter-spacing: -2px;
             margin-bottom: 1.5rem;
-            font-weight: 500;
         }
 
         .shop-header p {
             color: var(--text-muted);
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
             font-size: 1.1rem;
+            font-weight: 400;
         }
 
-        .filters {
+        /* STICKY FILTER BAR */
+        .sticky-filter-bar {
+            position: sticky;
+            top: 75px;
+            /* Adjusts just below the navbar */
+            z-index: 90;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+
+        /* DESKTOP FILTERS */
+        .filters-desktop {
             display: flex;
             justify-content: center;
-            gap: 2.5rem;
-            margin-top: 5rem;
+            gap: 1rem;
             flex-wrap: wrap;
             list-style: none;
         }
 
         .filter-link {
-            background: transparent;
-            border: none;
-            color: var(--text-dark-muted);
-            padding-bottom: 5px;
+            background: var(--bg-secondary);
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: 0.3s var(--transition-smooth);
-            position: relative;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.4s;
         }
 
-        .filter-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 1px;
-            background-color: var(--gold);
-            transition: 0.3s var(--transition-smooth);
-        }
-
-        .filter-link:hover,
-        .filter-link.active {
+        .filter-link:hover {
             color: var(--text-main);
+            border-color: var(--border);
         }
 
-        .filter-link:hover::after,
-        .filter-link.active::after {
-            width: 100%;
+        .filter-link.active {
+            background: var(--text-main);
+            color: var(--bg-primary);
         }
 
-        /* --- PRODUCT GRID --- */
+        /* MOBILE FILTERS */
+        .filters-mobile {
+            display: none;
+            text-align: center;
+        }
+
+        .mobile-select {
+            padding: 1rem;
+            width: 80%;
+            max-width: 300px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .mobile-select:focus {
+            border-color: var(--accent);
+        }
+
+        /* SHOP GRID */
         .shop-grid {
-            padding: 0 0 120px 0;
+            padding: 0 0 15vh 0;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 3rem 2rem;
-            min-height: 400px;
+            gap: 4rem 2rem;
+            min-height: 40vh;
         }
 
         .product-card {
             background: transparent;
             position: relative;
             opacity: 0;
-            transform: translateY(20px);
-            transition: 0.5s ease-out forwards;
+            transform: translateY(40px);
+            transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
 
-        .product-card.show {
-            opacity: 1;
-            transform: translateY(0);
+        .product-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
         }
 
+        /* SQUARE PRODUCT CONTAINERS */
         .product-img-wrapper {
             position: relative;
-            height: 480px;
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            height: auto;
             overflow: hidden;
-            background: #ffffff;
-            /* White background for PNGs */
-            margin-bottom: 1.2rem;
-            cursor: pointer;
-            border-radius: 8px;
+            background: var(--bg-secondary);
+            margin-bottom: 1.5rem;
+            border-radius: 20px;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .product-img-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            background-color: #ffffff;
-            /* White background for PNGs */
-            transition: transform 0.8s var(--transition-smooth);
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .product-card:hover .product-img-wrapper img {
+        .product-card-link:hover .product-img-wrapper {
+            transform: translateY(-10px);
+        }
+
+        .product-card-link:hover .product-img-wrapper img {
             transform: scale(1.08);
         }
 
         .product-details {
-            text-align: center;
-            position: relative;
-            padding-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .product-cat {
-            font-size: 0.7rem;
-            color: var(--text-dark-muted);
+            font-size: 0.75rem;
+            color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.3rem;
-            display: block;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
-        /* Fixed Title Truncation */
         .product-title {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            color: white;
+            font-size: 1.15rem;
+            color: var(--text-main);
             font-weight: 500;
             display: -webkit-box;
-            -webkit-line-clamp: 1;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            padding: 0 10px;
         }
 
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.7rem 1.2rem;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            width: 100%;
-            transition: 0.3s;
-            gap: 8px;
-            border-radius: 4px;
-        }
-
-        .whatsapp-btn:hover {
-            border-color: var(--gold);
-            background-color: rgba(212, 175, 55, 0.1);
-            color: var(--gold);
-        }
-
-        .whatsapp-icon {
-            font-size: 1.1rem;
-            color: #25D366;
-            transition: 0.3s;
-        }
-
-        .whatsapp-btn:hover .whatsapp-icon {
-            color: var(--gold);
-        }
-
-        /* --- AWARD WINNING PRODUCT DIALOG --- */
-        .product-dialog-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 100000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            opacity: 0;
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 20px;
-        }
-
-        .product-dialog-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .product-dialog-content {
-            position: relative;
-            width: 1000px;
-            max-width: 95vw;
-            max-height: 90vh;
-            background: #0d0d0d;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            display: flex;
-            flex-direction: row;
-            overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
-            transform: translateY(20px) scale(0.98);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .product-dialog-overlay.active .product-dialog-content {
-            transform: translateY(0) scale(1);
-        }
-
-        .product-dialog-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            font-size: 24px;
-            line-height: 1;
-            cursor: pointer;
-            transition: 0.3s;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .product-dialog-close:hover {
-            background: var(--gold);
-            color: black;
-            border-color: var(--gold);
-            transform: rotate(90deg);
-        }
-
-        /* Left Column: Image Gallery */
-        .dialog-image-col {
-            width: 50%;
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px;
-            overflow-y: auto;
-            scrollbar-width: none;
-        }
-
-        .dialog-image-col::-webkit-scrollbar {
-            display: none;
-        }
-
-        .dialog-main-img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .dialog-thumbnails {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .dialog-thumbnails img {
-            width: 64px;
-            height: 64px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: 0.3s;
-            opacity: 0.5;
-        }
-
-        .dialog-thumbnails img:hover,
-        .dialog-thumbnails img.active {
-            border-color: #000;
-            opacity: 1;
-            transform: translateY(-2px);
-        }
-
-        /* Right Column: Details */
-        .dialog-info-col {
-            width: 50%;
-            padding: 50px 40px;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            /* This enables scrolling */
-            text-align: left;
-            overscroll-behavior: contain;
-            /* Prevents the background from scrolling when you reach the end */
-            -webkit-overflow-scrolling: touch;
-            /* Better scrolling for mobile/trackpads */
-        }
-
-        /* Custom Scrollbar for Info Column */
-        .dialog-info-col::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .dialog-info-col::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .dialog-info-col::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .dialog-info-col::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .dialog-cat {
-            color: var(--gold);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            font-weight: 600;
-            display: block;
-        }
-
-        .dialog-title {
-            color: white;
-            margin: 0 0 20px 0;
-            font-size: 2.2rem;
-            font-family: var(--font-head);
-            font-weight: 500;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
-
-        .dialog-meta-flex {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .meta-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            color: #d4d4d8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-
-        .dialog-desc-wrapper {
-            margin-bottom: 40px;
-        }
-
-        .dialog-desc-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: #71717a;
-            letter-spacing: 1.5px;
-            margin-bottom: 12px;
-            display: block;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 8px;
-        }
-
-        .dialog-desc {
-            color: #a1a1aa;
-            font-size: 0.95rem;
-            line-height: 1.8;
-            font-family: var(--font-body);
-            margin: 0;
-            white-space: pre-wrap;
-        }
-
-        .dialog-action {
-            margin-top: auto;
-            padding-top: 20px;
-        }
-
-        .dialog-whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: var(--gold);
-            color: #000;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: none;
-            border-radius: 8px;
-            padding: 16px 32px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            font-family: var(--font-body);
-        }
-
-        .dialog-whatsapp-btn:hover {
-            background: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
-        }
-
-        .dialog-whatsapp-btn i {
-            font-size: 1.4rem;
-        }
-
+        /* FOOTER */
         footer {
             padding: 4rem 0;
             text-align: center;
-            border-top: 1px solid #222;
-            font-size: 0.8rem;
-            color: #555;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-light);
         }
 
         /* RESPONSIVE */
@@ -600,51 +439,12 @@
             .shop-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
-
-            .product-img-wrapper {
-                height: 400px;
-            }
         }
 
         @media (max-width: 900px) {
             .shop-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-
-            .shop-header h1 {
-                font-size: 3.5rem;
-            }
-
-            .product-dialog-content {
-                flex-direction: column;
-                overflow-y: auto;
-            }
-
-            .dialog-image-col {
-                width: 100%;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                padding: 30px;
-            }
-
-            .dialog-info-col {
-                width: 100%;
-                padding: 40px 30px;
-            }
-
-            .dialog-main-img {
-                max-height: 40vh;
-            }
-
-            .dialog-title {
-                font-size: 1.8rem;
-            }
-
-            .product-dialog-close {
-                top: 16px;
-                right: 16px;
-                background: rgba(0, 0, 0, 0.5);
-                border-color: rgba(255, 255, 255, 0.2);
+                gap: 3rem 1.5rem;
             }
         }
 
@@ -657,35 +457,40 @@
                 display: flex;
             }
 
-            nav {
-                padding: 1rem 1.5rem;
+            .filters-desktop {
+                display: none;
+            }
+
+            .filters-mobile {
+                display: block;
+            }
+
+            .cursor-dot,
+            .cursor-circle {
+                display: none;
+            }
+
+            body,
+            a,
+            button,
+            .menu-toggle,
+            select {
+                cursor: auto !important;
             }
         }
 
         @media (max-width: 600px) {
-            .shop-header h1 {
-                font-size: 2.8rem;
-            }
-
             .shop-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem 1rem;
             }
 
             .product-img-wrapper {
-                height: 260px;
+                border-radius: 12px;
             }
 
             .product-title {
-                font-size: 0.95rem;
-            }
-
-            .dialog-image-col {
-                padding: 20px;
-            }
-
-            .dialog-info-col {
-                padding: 30px 20px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -693,67 +498,83 @@
 
 <body>
 
-    <nav>
-        <a href="/" class="logo">BHAKTI<span class="gold">.</span></a>
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <nav aria-label="Main Navigation">
+        <a href="/" class="logo">BHAKTI<span class="text-accent">.</span></a>
         <div class="nav-links">
             <a href="/">Home</a>
-            <a href="/shop" class="gold">Shop</a>
+            <a href="/shop.html" class="active">Shop</a>
             <a href="/wholesale">Wholesale</a>
             <a href="/bespoke">Bespoke</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
         </div>
-        <div class="menu-toggle" onclick="window.toggleMenu()">
+        <div class="menu-toggle" onclick="window.toggleMenu()" aria-label="Toggle Menu">
             <span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
         </div>
     </nav>
 
     <div class="mobile-overlay" id="mobileOverlay">
-        <a href="/" class="mobile-links" onclick="window.toggleMenu()">Home</a>
-        <a href="/shop" class="mobile-links" onclick="window.toggleMenu()">Shop</a>
-        <a href="/wholesale" class="mobile-links" onclick="window.toggleMenu()">Wholesale</a>
-        <a href="/bespoke" class="mobile-links" onclick="window.toggleMenu()">Bespoke</a>
-        <a href="/about" class="mobile-links" onclick="window.toggleMenu()">About</a>
-        <a href="/contact" class="mobile-links" onclick="window.toggleMenu()">Contact</a>
+        <div class="menu-close" onclick="window.toggleMenu()">✕</div>
+        <div class="mobile-link-wrapper"><a href="/" class="mobile-links" onclick="window.toggleMenu()">Home</a></div>
+        <div class="mobile-link-wrapper"><a href="/shop.html" class="mobile-links"
+                onclick="window.toggleMenu()">Shop</a></div>
+        <div class="mobile-link-wrapper"><a href="/wholesale" class="mobile-links"
+                onclick="window.toggleMenu()">Wholesale</a></div>
+        <div class="mobile-link-wrapper"><a href="/bespoke" class="mobile-links"
+                onclick="window.toggleMenu()">Bespoke</a></div>
+        <div class="mobile-link-wrapper"><a href="/about" class="mobile-links" onclick="window.toggleMenu()">About</a>
+        </div>
+        <div class="mobile-link-wrapper"><a href="/contact" class="mobile-links"
+                onclick="window.toggleMenu()">Contact</a></div>
     </div>
 
     <header class="shop-header">
-        <div class="container">
-            <h1>The Archive</h1>
-            <p>Select pieces available for immediate dispatch. For custom colors, please visit our Bespoke section.</p>
-
-            <ul class="filters" id="filterContainer">
-                <li><button class="filter-link active" onclick="window.filterProducts('View All', this)">Loading
-                        Filters...</button></li>
-            </ul>
+        <div class="container gs-reveal">
+            <h1>Wholesale Catalog</h1>
+            <p>Select inventory available for immediate bulk dispatch.</p>
         </div>
     </header>
 
+    <div class="sticky-filter-bar gs-reveal">
+        <div class="container">
+            <ul class="filters-desktop" id="filterContainer">
+                <li><button class="filter-link active">Loading...</button></li>
+            </ul>
+
+            <div class="filters-mobile">
+                <select class="mobile-select" id="mobileSelectContainer"
+                    onchange="window.filterProducts(this.value, null)">
+                    <option value="View All">View All</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <section class="container">
         <div class="shop-grid" id="shopGrid">
-            <p style='text-align:center; grid-column: 1/-1; color: var(--text-muted);'>Fetching the latest collection...
-            </p>
+            <p style='text-align:center; grid-column: 1/-1; color: var(--text-light); font-size: 1.1rem;'>Synchronizing
+                with current inventory...</p>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Bhakti Decor.</p>
+            <p>&copy; 2026 Bhakti Decor. Engineered for Scale.</p>
         </div>
     </footer>
 
-    <div class="product-dialog-overlay" id="productDialog" onclick="window.closeProductModal(event)">
-        <div class="product-dialog-content" id="productDialogDynamicContent" onclick="event.stopPropagation()">
-        </div>
-    </div>
-
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // Obfuscated config keys to prevent easy copying from DevTools inspect
+        // Firebase Config
         const firebaseConfig = {
             apiKey: atob("QUl6YVN5QUoxU2VCZ05falNxMXgxUU9CQmVpcUR1SVpKcTliMDUw"),
             authDomain: atob("Ymhha3RpLWRlY29yLmZpcmViYXNlYXBwLmNvbQ=="),
@@ -764,209 +585,132 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
         let allProducts = [];
 
-        // --- 1. FETCH DATA FROM FIREBASE ---
+        // Custom Cursor Logic
+        const dot = document.querySelector('.cursor-dot');
+        const circle = document.querySelector('.cursor-circle');
+
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
+            gsap.to(circle, { x: e.clientX, y: e.clientY, duration: 0.15 });
+        });
+
+        // Apply cursor hover effect dynamically
+        function attachCursorHover() {
+            document.querySelectorAll('a, button, .menu-toggle, .filter-link, select, .menu-close').forEach(el => {
+                el.addEventListener('mouseenter', () => circle.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => circle.classList.remove('cursor-hover'));
+            });
+        }
+
         async function loadProducts() {
             try {
                 const q = query(collection(db, "products"), where("isActive", "==", true));
                 const querySnapshot = await getDocs(q);
-
-                allProducts = [];
                 const uniqueCategories = new Set();
 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-
-                    // Support multiple categories
                     const itemCats = data.categories || (data.category ? [data.category] : ['Uncategorized']);
                     itemCats.forEach(c => uniqueCategories.add(c));
-
                     allProducts.push({
-                        id: doc.id,
-                        title: data.name,
-                        categories: itemCats,
-                        primaryCat: itemCats[0],
-                        description: data.description || '',
-                        gsm: data.gsm || '',
-                        images: data.images && data.images.length > 0 ? data.images : ['https://via.placeholder.com/400x600?text=No+Image'],
-                        img: data.images && data.images.length > 0 ? data.images[0] : 'https://via.placeholder.com/400x600?text=No+Image'
+                        id: doc.id, title: data.name, categories: itemCats, primaryCat: itemCats[0],
+                        img: data.images && data.images.length > 0 ? data.images[0] : 'https://images.unsplash.com/photo-1618331835717-801e976710b2?w=800&q=80'
                     });
                 });
 
                 renderFilters(Array.from(uniqueCategories));
-                renderProducts(shuffleArray([...allProducts]));
+                renderProducts(allProducts);
             } catch (error) {
-                console.error("Error loading products:", error);
-                document.getElementById('shopGrid').innerHTML = "<p style='text-align:center; grid-column: 1/-1; color: red;'>Failed to load collection. Please try again later.</p>";
+                console.error(error);
+                document.getElementById('shopGrid').innerHTML = "<p style='text-align:center; grid-column: 1/-1; color: #D32F2F;'>Failed to synchronize inventory.</p>";
             }
         }
 
-        // --- 2. RENDER DYNAMIC FILTERS ---
         function renderFilters(categories) {
-            const filterContainer = document.getElementById('filterContainer');
-            filterContainer.innerHTML = `<li><button class="filter-link active" onclick="window.filterProducts('View All', this)">View All</button></li>`;
+            const deskContainer = document.getElementById('filterContainer');
+            const mobContainer = document.getElementById('mobileSelectContainer');
+
+            deskContainer.innerHTML = `<li><button class="filter-link active" onclick="window.filterProducts('View All', this)">View All</button></li>`;
+            mobContainer.innerHTML = `<option value="View All">View All</option>`;
 
             categories.sort().forEach(category => {
-                filterContainer.innerHTML += `<li><button class="filter-link" onclick="window.filterProducts('${category}', this)">${category}</button></li>`;
+                deskContainer.innerHTML += `<li><button class="filter-link" onclick="window.filterProducts('${category}', this)">${category}</button></li>`;
+                mobContainer.innerHTML += `<option value="${category}">${category}</option>`;
             });
+            attachCursorHover();
         }
 
-        // --- 3. RENDER ENGINE ---
         function renderProducts(productList) {
             const grid = document.getElementById('shopGrid');
             grid.innerHTML = '';
 
-            if (productList.length === 0) {
-                grid.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>No products found in this category.</p>";
-                return;
-            }
-
             productList.forEach((product, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
+                card.style.transitionDelay = `${(index % 12) * 0.08}s`;
 
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-                card.style.transitionDelay = `${(index % 12) * 0.05}s`;
-
-                // Card with single line title and no price
                 card.innerHTML = `
-                <div class="product-img-wrapper" onclick="window.openProductModal('${product.id}')">
-                    <img src="${product.img}" alt="${product.title}" loading="lazy">
-                </div>
-                <div class="product-details">
-                    <span class="product-cat">${product.primaryCat}</span>
-                    <h3 class="product-title" title="${product.title}">${product.title}</h3>
-                </div>
+                <a href="product.html?id=${product.id}" class="product-card-link">
+                    <div class="product-img-wrapper">
+                        <img src="${product.img}" alt="${product.title}" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <span class="product-cat">${product.primaryCat}</span>
+                        <h3 class="product-title">${product.title}</h3>
+                    </div>
+                </a>
                 `;
                 grid.appendChild(card);
 
                 requestAnimationFrame(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
                 });
             });
+            attachCursorHover();
         }
 
-        // --- 4. FILTER & SHUFFLE LOGIC ---
         window.filterProducts = function (category, btnElement) {
-            document.querySelectorAll('.filter-link').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
-
-            if (category === 'View All') {
-                renderProducts(shuffleArray([...allProducts]));
+            if (btnElement) {
+                document.querySelectorAll('.filter-link').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
+                document.getElementById('mobileSelectContainer').value = category;
             } else {
-                const filtered = allProducts.filter(p => p.categories.includes(category));
-                renderProducts(filtered);
-            }
-        };
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        // --- 5. EDITORIAL MODAL ENGINE ---
-        window.openProductModal = function (id) {
-            const product = allProducts.find(p => p.id === id);
-            if (!product) return;
-
-            const modal = document.getElementById('productDialog');
-            const contentArea = document.getElementById('productDialogDynamicContent');
-
-            // Generate Thumbnails
-            let thumbHtml = '';
-            if (product.images && product.images.length > 1) {
-                product.images.forEach((imgUrl, idx) => {
-                    const activeClass = idx === 0 ? 'active' : '';
-                    thumbHtml += `<img src="${imgUrl}" class="${activeClass}" onclick="window.updateDialogMainImg(this, '${imgUrl}')">`;
+                document.querySelectorAll('.filter-link').forEach(btn => {
+                    if (btn.innerText === category) btn.classList.add('active');
+                    else btn.classList.remove('active');
                 });
             }
 
-            // Generate GSM Badge
-            let gsmHtml = '';
-            if (product.gsm && product.gsm.trim() !== "") {
-                gsmHtml = `<span class="meta-badge">GSM: ${product.gsm}</span>`;
-            }
+            if (category === 'View All') renderProducts(allProducts);
+            else renderProducts(allProducts.filter(p => p.categories.includes(category)));
 
-            // Format Description (Respect line breaks)
-            const descText = product.description ? product.description.replace(/\n/g, '<br>') : 'No description available for this item.';
-
-            // Inject Split Layout Content
-            // Inside window.openProductModal, change the contentArea.innerHTML injection to this:
-
-            contentArea.innerHTML = `
-    <button class="product-dialog-close" onclick="window.closeProductModal()">&times;</button>
-    <div class="dialog-image-col">
-        <img src="${product.img}" id="dialogMainImg" class="dialog-main-img" alt="${product.title}">
-        ${thumbHtml ? `<div class="dialog-thumbnails">${thumbHtml}</div>` : ''}
-    </div>
-    <div class="dialog-info-col" data-lenis-prevent> 
-        <span class="dialog-cat">${product.primaryCat}</span>
-        <h2 class="dialog-title">${product.title}</h2>
-        
-        ${gsmHtml ? `<div class="dialog-meta-flex">${gsmHtml}</div>` : ''}
-        
-        <div class="dialog-desc-wrapper">
-            <span class="dialog-desc-label">About this piece</span>
-            <p class="dialog-desc">${descText}</p>
-        </div>
-        
-        <div class="dialog-action">
-            <button class="dialog-whatsapp-btn" onclick="window.buyOnWhatsapp('${product.title.replace(/'/g, "\\'")}', '${product.img}')">
-                <i class="fi fi-brands-whatsapp"></i> Inquire Now
-            </button>
-        </div>
-    </div>
-`;
-            // Lock background scrolling
-            document.body.classList.add('no-scroll');
-            if (window.lenis) window.lenis.stop();
-
-            modal.classList.add('active');
-        };
-
-        window.updateDialogMainImg = function (element, src) {
-            document.getElementById('dialogMainImg').src = src;
-            document.querySelectorAll('.dialog-thumbnails img').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-        };
-
-        window.closeProductModal = function (event) {
-            if (!event || event.target.id === 'productDialog' || event.target.className.includes('product-dialog-close')) {
-                document.getElementById('productDialog').classList.remove('active');
-                document.body.classList.remove('no-scroll');
-                if (window.lenis) window.lenis.start();
-            }
-        };
-
-        // --- 6. WHATSAPP UTILITY ---
-        window.buyOnWhatsapp = function (productName, productImage) {
-            const phoneNumber = "918238772094";
-            const message = `Hello Bhakti Decor, I am interested in:\n\n*Product:* ${productName}\n*Image:* ${productImage}`;
-            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            // Scroll to top of grid when filtering so user sees results immediately
+            window.scrollTo({ top: document.querySelector('.sticky-filter-bar').offsetTop - 20, behavior: 'smooth' });
         };
 
         window.toggleMenu = function () {
             document.getElementById('mobileOverlay').classList.toggle('active');
+            document.body.style.overflow = document.body.style.overflow === 'hidden' ? 'auto' : 'hidden';
         };
 
-        // Initialize Fetching
-        document.addEventListener('DOMContentLoaded', loadProducts);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            attachCursorHover();
+        });
 
-        // Lenis Smooth Scroll Setup
-        const lenis = new Lenis();
-        window.lenis = lenis; // Attach to window so modal can pause it
+        // GSAP Header Reveal
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.fromTo('.gs-reveal', { autoAlpha: 0, y: 40 }, { duration: 1.2, autoAlpha: 1, y: 0, ease: "power4.out", delay: 0.2 });
+
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
     </script>
-
 </body>
 
 </html>
