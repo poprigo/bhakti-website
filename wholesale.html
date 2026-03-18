@@ -6,6 +6,489 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Wholesale Distribution | Global Manufacturing | Bhakti Decor</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J31VQKWW7S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // Configure basic settings & Page View
+        gtag('config', 'G-J31VQKWW7S', {
+            'send_page_view': true,
+            'page_title': 'Wholesale Distribution',
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-brands/css/uicons-brands.css'>
+
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F8F8;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --accent: #B89768;
+            --border: rgba(0, 0, 0, 0.06);
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, a, button, .menu-toggle { cursor: none !important; }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .font-head { font-family: var(--font-head); font-weight: 700; text-transform: uppercase; }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        .container { max-width: 90vw; margin: 0 auto; }
+        .text-accent { color: var(--accent); }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot, .cursor-circle {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 9999;
+        }
+
+        .cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+        .cursor-circle {
+            width: 40px; height: 40px; border: 1px solid rgba(184, 151, 104, 0.5);
+            border-radius: 50%; transition: width 0.3s, height 0.3s, background 0.3s;
+        }
+
+        .cursor-hover { width: 70px; height: 70px; background: rgba(184, 151, 104, 0.1); border-color: transparent; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 5vw; display: flex;
+            justify-content: space-between; align-items: center; z-index: 100;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; }
+
+        .nav-links { display: flex; gap: 2.5rem; }
+
+        .nav-links a {
+            font-size: 0.85rem; font-weight: 500; text-transform: uppercase;
+            position: relative; padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0%;
+            height: 2px; background: var(--accent); transition: width 0.4s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a.active { color: var(--accent); }
+
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; z-index: 102; padding: 10px; }
+        .bar { width: 30px; height: 2px; background-color: var(--text-main); transition: 0.3s; }
+
+        /* --- MOBILE MENU --- */
+        .mobile-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--text-main); z-index: 101; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; gap: 2rem; transform: translateY(-100%);
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .mobile-overlay.active { transform: translateY(0); }
+
+        .menu-close {
+            position: absolute; top: 2rem; right: 5vw; font-size: 2.5rem; color: var(--bg-primary);
+            cursor: pointer; transition: transform 0.4s;
+        }
+
+        .menu-close:hover { transform: rotate(90deg); color: var(--accent); }
+
+        .mobile-links { font-family: var(--font-head); font-size: 3rem; color: var(--bg-primary); display: block; transition: color 0.3s; }
+        .mobile-links:hover { color: var(--accent); }
+
+        /* --- 1. EDITORIAL HERO --- */
+        .wholesale-hero { height: 120vh; display: flex; position: relative; align-items: center; padding: 0 5vw; }
+        .hero-text-large { position: relative; z-index: 2; }
+        .hero-text-large h1 { font-size: clamp(4rem, 15vw, 12rem); line-height: 0.85; letter-spacing: -6px; }
+        .hero-text-large .outline-text { color: transparent; -webkit-text-stroke: 1px var(--text-main); }
+        
+        .hero-floating-img {
+            position: absolute; right: 5vw; top: 20%; width: 35vw; height: 60vh;
+            border-radius: 30px; overflow: hidden; z-index: 1;
+        }
+        .hero-floating-img img { width: 100%; height: 120%; object-fit: cover; }
+
+        /* --- 2. THE SPEC SHEET SECTION --- */
+        .spec-section { background: var(--text-main); color: var(--bg-primary); padding: 15vh 5vw; position: relative; }
+        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10vw; }
+        .spec-item { padding: 3rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .spec-item span { color: var(--accent); font-family: var(--font-head); font-size: 0.85rem; margin-bottom: 1rem; display: block; }
+        .spec-item h3 { font-size: 2rem; margin-bottom: 1.5rem; }
+        .spec-item p { color: #888; max-width: 400px; }
+
+        /* --- 3. MASONRY CATALOG (ASYMMETRICAL) --- */
+        .wholesale-catalog { padding: 20vh 0; }
+        .masonry-layout { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2vw; }
+        .m-card { position: relative; border-radius: 20px; overflow: hidden; background: var(--bg-secondary); }
+        .m-card-1 { grid-column: 2 / 7; aspect-ratio: 1/1; margin-top: 5vh; }
+        .m-card-2 { grid-column: 8 / 12; aspect-ratio: 4/5; }
+        .m-card-3 { grid-column: 1 / 5; aspect-ratio: 3/4; margin-top: -10vh; z-index: 2; }
+        .m-card-4 { grid-column: 6 / 12; aspect-ratio: 16/9; margin-top: 2vh; }
+        .m-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
+        .m-card:hover img { transform: scale(1.05); }
+        .m-label { position: absolute; bottom: 2rem; left: 2rem; background: var(--bg-primary); padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 600; font-size: 0.85rem; }
+
+        /* --- 4. GLOBAL LOGISTICS SECTION --- */
+        .logistics-section { padding: 15vh 5vw; background: var(--bg-secondary); text-align: center; }
+        .logistics-wrap { max-width: 1000px; margin: 0 auto; }
+        .logistics-wrap h2 { font-size: 4rem; margin-bottom: 3rem; }
+        .logistics-steps { display: flex; justify-content: space-between; text-align: left; margin-top: 5rem; gap: 3rem; }
+        .log-step { width: 33%; }
+        .log-step h4 { color: var(--accent); margin-bottom: 1rem; }
+
+        /* --- 5. CTA (EDITORIAL STYLE) --- */
+        .wholesale-footer-cta {
+            height: 80vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; background: var(--text-main); color: var(--bg-primary); text-align: center;
+        }
+        .wholesale-footer-cta h2 { font-size: clamp(3rem, 10vw, 8rem); line-height: 0.8; margin-bottom: 3rem; }
+        .cta-btn-circle {
+            width: 180px; height: 180px; border: 1px solid var(--accent); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; text-transform: uppercase;
+            font-family: var(--font-head); font-weight: 700; color: var(--accent);
+            transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .cta-btn-circle:hover { background: var(--accent); color: var(--text-main); transform: scale(1.1); }
+
+        /* --- FOOTER --- */
+        footer { background: var(--text-main); color: var(--bg-primary); padding: 8rem 0 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .footer-logo { font-size: 2rem; font-family: var(--font-head); font-weight: 800; margin-bottom: 1rem; }
+        .footer-grid h4 { color: var(--accent); margin-bottom: 1.5rem; font-size: 1rem; font-family: var(--font-body); font-weight: 600; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid ul li { margin-bottom: 0.8rem; color: #aaa; font-size: 0.95rem; transition: color 0.3s; }
+        .footer-grid ul li:hover { color: var(--accent); }
+        .footer-bottom { font-size: 10vw; font-family: var(--font-head); font-weight: 800; text-align: center; line-height: 0.8; color: rgba(255, 255, 255, 0.05); margin-top: 4rem; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-floating-img { display: none; }
+            .hero-text-large { text-align: center; width: 100%; }
+            .spec-grid { grid-template-columns: 1fr; gap: 0; }
+            .masonry-layout { grid-template-columns: 1fr; display: flex; flex-direction: column; gap: 5vh; padding: 0 5vw; }
+            .m-card { grid-column: auto !important; margin: 0 !important; aspect-ratio: 16/9 !important; }
+            .logistics-steps { flex-direction: column; }
+            .log-step { width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .cursor-dot, .cursor-circle { display: none; }
+            body, a, button, .menu-toggle { cursor: auto !important; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <nav aria-label="Main Navigation">
+        <a href="/" class="logo font-head">BHAKTI<span class="text-accent">.</span></a>
+        <div class="nav-links">
+            <a href="/" data-nav="Home">Home</a>
+            <a href="/shop" data-nav="Shop">Shop</a>
+            <a href="/wholesale" class="active" data-nav="Wholesale">Wholesale</a>
+            <a href="/bespoke" data-nav="Bespoke">Bespoke</a>
+            <a href="/about" data-nav="About">About</a>
+            <a href="/contact" data-nav="Contact">Contact</a>
+        </div>
+        <div class="menu-toggle" onclick="window.toggleMenu()" aria-label="Toggle Menu">
+            <span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="menu-close" onclick="window.toggleMenu()">✕</div>
+        <div class="mobile-link-wrapper"><a href="/" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Home Mobile">Home</a></div>
+        <div class="mobile-link-wrapper"><a href="/shop" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Shop Mobile">Shop</a></div>
+        <div class="mobile-link-wrapper"><a href="/wholesale" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Wholesale Mobile">Wholesale</a></div>
+        <div class="mobile-link-wrapper"><a href="/bespoke" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Bespoke Mobile">Bespoke</a></div>
+        <div class="mobile-link-wrapper"><a href="/about" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="About Mobile">About</a></div>
+        <div class="mobile-link-wrapper"><a href="/contact" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Contact Mobile">Contact</a></div>
+    </div>
+
+    <header class="wholesale-hero">
+        <div class="hero-text-large gs-reveal">
+            <h1>WHOLE<br><span class="outline-text">SALE</span></h1>
+            <p style="margin-top: 4vh; max-width: 500px; font-weight: 500;">Bhakti Decor operates as a
+                direct-to-retailer manufacturing powerhouse. We specialize in high-volume export cycles with zero
+                compromise on structural integrity.</p>
+        </div>
+        <div class="hero-floating-img">
+            <img src="./images/home/process.jpg" class="parallax-img" alt="Factory Production">
+        </div>
+    </header>
+
+    <section class="spec-section">
+        <div class="container">
+            <div class="spec-grid">
+                <div class="spec-item gs-reveal">
+                    <span>01 / CAPACITY</span>
+                    <h3>Volume Logistics</h3>
+                    <p>Our production floor is optimized for container-load exports (FCL/LCL), ensuring consistent
+                        quality across massive production runs.</p>
+                </div>
+                <div class="spec-item gs-reveal">
+                    <span>02 / STANDARDS</span>
+                    <h3>Export-Grade Quality</h3>
+                    <p>Utilizing high-GSM sustainable paper, our products are engineered to withstand prolonged maritime
+                        humidity and long-haul transit.</p>
+                </div>
+                <div class="spec-item gs-reveal">
+                    <span>03 / GLOBAL REACH</span>
+                    <h3>Door-to-Port Delivery</h3>
+                    <p>From our Surat atelier to 50+ global port destinations, we manage the documentation and logistics
+                        of your supply chain.</p>
+                </div>
+                <div class="spec-item gs-reveal">
+                    <span>04 / PARTNERSHIP</span>
+                    <h3>White Label Options</h3>
+                    <p>We provide exclusive manufacturing for global brands, including bespoke logo printing and
+                        proprietary color palette development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wholesale-catalog container">
+        <h2 class="gs-reveal" style="text-align: center; margin-bottom: 10vh; font-size: 3.5rem;">The Bulk Collection</h2>
+        <div class="masonry-layout">
+            <a href="/shop?category=Honeycomb_Balls" class="m-card m-card-1 gs-reveal hover-target track-category" data-cat="Honeycomb Balls">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772201613/v9fuhyvu0bfwhjcxvwnq.png"
+                    class="parallax-img" alt="Honeycomb">
+                <div class="m-label">Honeycomb Balls</div>
+            </a>
+            <a href="/shop?category=Gift_Tissue_Wrap" class="m-card m-card-2 gs-reveal hover-target track-category" data-cat="Gift Tissue Wrap">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772451585/pccjnaq1stdwcpokvgvc.jpg"
+                    class="parallax-img" alt="Tissue">
+                <div class="m-label">Gift Tissue Paper</div>
+            </a>
+            <a href="/shop?category=Pinatas" class="m-card m-card-3 gs-reveal hover-target track-category" data-cat="Pinatas">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772281252/hxkatfgji9y85rccw9si.jpg"
+                    class="parallax-img" alt="Pinatas">
+                <div class="m-label">Wholesale Pinatas</div>
+            </a>
+            <a href="/shop?category=Paper_Fans" class="m-card m-card-4 gs-reveal hover-target track-category" data-cat="Paper Fans">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772346305/wbrrfrxkgydbrlixb02p.jpg"
+                    class="parallax-img" alt="Fans">
+                <div class="m-label">Premium Paper Fans</div>
+            </a>
+        </div>
+    </section>
+
+    <section class="logistics-section">
+        <div class="container logistics-wrap">
+            <h2 class="gs-reveal">Surat to the World</h2>
+            <div class="logistics-steps">
+                <div class="log-step gs-reveal">
+                    <h4>Stage 01</h4>
+                    <p>Automated precision cutting & artisan hand-assembly in our Surat facility.</p>
+                </div>
+                <div class="log-step gs-reveal">
+                    <h4>Stage 02</h4>
+                    <p>Vacuum-compressed bulk packaging for maximum container volume efficiency.</p>
+                </div>
+                <div class="log-step gs-reveal">
+                    <h4>Stage 03</h4>
+                    <p>Export documentation & clearance for seamless arrival at your destination port.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wholesale-footer-cta">
+        <h2 class="gs-reveal">Ready to <br>Import?</h2>
+        <a href="/contact" class="cta-btn-circle hover-target gs-reveal" data-ga-action="wholesale_cta_request_catalog">Request Catalog</a>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid gs-reveal">
+                <div>
+                    <div class="footer-logo">BHAKTI<span class="text-accent">.</span></div>
+                    <p style="color:#aaa; max-width: 300px;">Engineering the finest paper artistry for global supply
+                        chains. Manufactured in Surat, exported everywhere.</p>
+                </div>
+                <div>
+                    <h4>Inventory</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="/shop" class="hover-target">Honeycomb Balls</a></li>
+                        <li><a href="/shop" class="hover-target">Gift Tissue</a></li>
+                        <li><a href="/shop" class="hover-target">Wholesale Pinatas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Partnership</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="/about" class="hover-target">Our Story</a></li>
+                        <li><a href="/wholesale" class="hover-target">Wholesale Orders</a></li>
+                        <li><a href="/contact" class="hover-target">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Connect</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="#" class="hover-target">Instagram</a></li>
+                        <li><a href="#" class="hover-target">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom gs-reveal">BHAKTI DECOR</div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <script>
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2 });
+        
+        // Advanced GA4 Scroll Depth Tracking
+        let maxScrollMilestone = 0;
+        lenis.on('scroll', (e) => {
+            if(e.dimensions.maxScroll === 0) return;
+            const scrollPercent = Math.round((e.animatedScroll / e.dimensions.maxScroll) * 100);
+            
+            if (scrollPercent > 24 && maxScrollMilestone < 25) { triggerScrollEvent(25); }
+            else if (scrollPercent > 49 && maxScrollMilestone < 50) { triggerScrollEvent(50); }
+            else if (scrollPercent > 74 && maxScrollMilestone < 75) { triggerScrollEvent(75); }
+            else if (scrollPercent > 98 && maxScrollMilestone < 100) { triggerScrollEvent(100); }
+        });
+
+        function triggerScrollEvent(depth) {
+            maxScrollMilestone = depth;
+            if(typeof gtag === 'function') {
+                gtag('event', 'scroll_depth_reached', { 'depth_percentage': depth, 'page_name': 'Wholesale' });
+            }
+        }
+
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        window.toggleMenu = () => {
+            document.getElementById('mobileOverlay').classList.toggle('active');
+            document.body.style.overflow = document.body.style.overflow === 'hidden' ? 'auto' : 'hidden';
+        };
+
+        // Custom Cursor Binding
+        if(window.innerWidth > 768) {
+            const dot = document.querySelector('.cursor-dot');
+            const circle = document.querySelector('.cursor-circle');
+            window.addEventListener('mousemove', (e) => {
+                gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
+                gsap.to(circle, { x: e.clientX, y: e.clientY, duration: 0.15 });
+            });
+            document.querySelectorAll('a, button, .hover-target, .menu-toggle').forEach(el => {
+                el.addEventListener('mouseenter', () => circle.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => circle.classList.remove('cursor-hover'));
+            });
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // General Reveals
+        document.querySelectorAll('.gs-reveal').forEach((elem) => {
+            gsap.fromTo(elem, { autoAlpha: 0, y: 60 }, { duration: 1.2, autoAlpha: 1, y: 0, ease: "power4.out", scrollTrigger: { trigger: elem, start: "top 85%" } });
+        });
+
+        // Parallax Image Effect
+        document.querySelectorAll('.parallax-img').forEach((img) => {
+            gsap.fromTo(img, { y: "-10%" }, { y: "10%", ease: "none", scrollTrigger: { trigger: img.parentElement, scrub: true } });
+        });
+
+        // --- GA4 EVENT LISTENERS BINDING ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Navigation Clicks
+            document.querySelectorAll('nav .nav-links a, .mobile-overlay a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const destination = e.target.getAttribute('data-nav') || e.target.innerText;
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'navigation_click', { 'menu_item': destination });
+                    }
+                });
+            });
+
+            // 2. Explicit CTA Buttons
+            document.querySelectorAll('[data-ga-action]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const action = e.currentTarget.getAttribute('data-ga-action');
+                    if(typeof gtag === 'function') {
+                        gtag('event', action, { 'page_location': 'wholesale' });
+                    }
+                });
+            });
+
+            // 3. Category Clicks (Masonry Grid)
+            document.querySelectorAll('.track-category').forEach(cat => {
+                cat.addEventListener('click', (e) => {
+                    const categoryName = e.currentTarget.getAttribute('data-cat');
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'select_category', { 'category_name': categoryName, 'source': 'Wholesale Masonry' });
+                    }
+                });
+            });
+
+            // 4. Footer Links
+            document.querySelectorAll('.footer-track-list a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const linkName = e.target.innerText;
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'footer_link_click', { 'link_text': linkName });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wholesale Distribution | Global Manufacturing | Bhakti Decor</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -772,4 +1255,4 @@
     </script>
 </body>
 
-</html>
+</html> -->

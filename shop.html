@@ -6,6 +6,459 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wholesale Collection | Premium Paper Decor | Bhakti Decor</title>
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J31VQKWW7S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // Configure basic settings & Page View
+        gtag('config', 'G-J31VQKWW7S', {
+            'send_page_view': true,
+            'page_title': 'Shop Archive',
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CORE VARIABLES */
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F4F4F4;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --text-light: #999999;
+            --accent: #B89768;
+            --border: rgba(0, 0, 0, 0.08);
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, a, button, .menu-toggle, select { cursor: none !important; }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .font-head { font-family: var(--font-head); font-weight: 700; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        .container { max-width: 90vw; margin: 0 auto; }
+        .text-accent { color: var(--accent); }
+
+        /* CUSTOM CURSOR */
+        .cursor-dot, .cursor-circle {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 9999;
+        }
+        .cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+        .cursor-circle {
+            width: 40px; height: 40px; border: 1px solid rgba(184, 151, 104, 0.5);
+            border-radius: 50%; transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+        }
+        .cursor-hover { width: 70px; height: 70px; background: rgba(184, 151, 104, 0.1); border-color: transparent; }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 5vw; display: flex;
+            justify-content: space-between; align-items: center; z-index: 100;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; font-family: var(--font-head); }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; text-transform: uppercase; position: relative; padding-bottom: 4px; }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px;
+            background: var(--accent); transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a.active { color: var(--accent); }
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; z-index: 102; padding: 10px; }
+        .bar { width: 30px; height: 2px; background-color: var(--text-main); transition: 0.3s; }
+
+        /* MOBILE MENU */
+        .mobile-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(135deg, var(--text-main) 0%, #1a1a1a 100%); z-index: 101;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            gap: 2rem; transform: translateY(-100%); transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .mobile-overlay::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(var(--accent) 1.5px, transparent 1.5px); background-size: 35px 35px;
+            opacity: 0.07; pointer-events: none;
+        }
+        .mobile-overlay.active { transform: translateY(0); }
+        .menu-close {
+            position: absolute; top: 2rem; right: 5vw; font-size: 2.5rem; color: var(--bg-primary);
+            font-family: var(--font-body); font-weight: 300; transition: transform 0.4s ease, color 0.3s;
+        }
+        .menu-close:hover { transform: rotate(90deg); color: var(--accent); }
+        .mobile-link-wrapper { overflow: hidden; position: relative; z-index: 2; }
+        .mobile-links {
+            font-family: var(--font-head); font-size: 3rem; color: var(--bg-primary); display: block;
+            transform: translateY(100%); transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .mobile-overlay.active .mobile-links { transform: translateY(0); }
+        .mobile-links:hover { color: var(--accent); }
+
+        /* HEADER */
+        .shop-header { padding: 20vh 0 5vh 0; text-align: center; }
+        .shop-header h1 { font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1; letter-spacing: -2px; margin-bottom: 1.5rem; }
+        .shop-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1.1rem; font-weight: 400; }
+
+        /* STICKY FILTER BAR */
+        .sticky-filter-bar {
+            position: sticky; top: 75px; z-index: 90; background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px); padding: 1.5rem 0; border-bottom: 1px solid var(--border); margin-bottom: 3rem;
+        }
+
+        /* DESKTOP FILTERS */
+        .filters-desktop { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; list-style: none; }
+        .filter-link {
+            background: var(--bg-secondary); border: 1px solid transparent; color: var(--text-muted);
+            padding: 0.75rem 1.5rem; border-radius: 50px; text-transform: uppercase; font-size: 0.75rem;
+            font-weight: 600; letter-spacing: 1px; transition: all 0.4s;
+        }
+        .filter-link:hover { color: var(--text-main); border-color: var(--border); }
+        .filter-link.active { background: var(--text-main); color: var(--bg-primary); }
+
+        /* MOBILE FILTERS */
+        .filters-mobile { display: none; text-align: center; }
+        .mobile-select {
+            padding: 1rem; width: 80%; max-width: 300px; font-family: var(--font-body); font-weight: 500;
+            text-transform: uppercase; font-size: 0.85rem; border: 1px solid var(--border); border-radius: 8px;
+            background: var(--bg-primary); outline: none; transition: border-color 0.3s;
+        }
+        .mobile-select:focus { border-color: var(--accent); }
+
+        /* SHOP GRID */
+        .shop-grid { padding: 0 0 15vh 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4rem 2rem; min-height: 40vh; }
+        .product-card { background: transparent; position: relative; opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+        .product-card-link { display: block; text-decoration: none; color: inherit; }
+
+        .product-img-wrapper {
+            position: relative; aspect-ratio: 1 / 1; width: 100%; height: auto; overflow: hidden;
+            background: var(--bg-secondary); margin-bottom: 1.5rem; border-radius: 20px;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .product-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .product-card-link:hover .product-img-wrapper { transform: translateY(-10px); }
+        .product-card-link:hover .product-img-wrapper img { transform: scale(1.08); }
+
+        .product-details { display: flex; flex-direction: column; align-items: flex-start; }
+        .product-cat { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem; font-weight: 600; }
+        .product-title { font-size: 1.15rem; color: var(--text-main); font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* FOOTER */
+        footer { padding: 4rem 0; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-light); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) { .shop-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 900px) { .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem 1.5rem; } }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .filters-desktop { display: none; }
+            .filters-mobile { display: block; }
+            .cursor-dot, .cursor-circle { display: none; }
+            body, a, button, .menu-toggle, select { cursor: auto !important; }
+        }
+        @media (max-width: 600px) {
+            .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem 1rem; }
+            .product-img-wrapper { border-radius: 12px; }
+            .product-title { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <nav aria-label="Main Navigation">
+        <a href="/" class="logo">BHAKTI<span class="text-accent">.</span></a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/shop.html" class="active">Shop</a>
+            <a href="/wholesale">Wholesale</a>
+            <a href="/bespoke">Bespoke</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </div>
+        <div class="menu-toggle" onclick="window.toggleMenu()" aria-label="Toggle Menu">
+            <span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="menu-close" onclick="window.toggleMenu()">✕</div>
+        <div class="mobile-link-wrapper"><a href="/" class="mobile-links" onclick="window.toggleMenu()">Home</a></div>
+        <div class="mobile-link-wrapper"><a href="/shop.html" class="mobile-links" onclick="window.toggleMenu()">Shop</a></div>
+        <div class="mobile-link-wrapper"><a href="/wholesale" class="mobile-links" onclick="window.toggleMenu()">Wholesale</a></div>
+        <div class="mobile-link-wrapper"><a href="/bespoke" class="mobile-links" onclick="window.toggleMenu()">Bespoke</a></div>
+        <div class="mobile-link-wrapper"><a href="/about" class="mobile-links" onclick="window.toggleMenu()">About</a></div>
+        <div class="mobile-link-wrapper"><a href="/contact" class="mobile-links" onclick="window.toggleMenu()">Contact</a></div>
+    </div>
+
+    <header class="shop-header">
+        <div class="container gs-reveal">
+            <h1>Wholesale Catalog</h1>
+            <p>Select inventory available for immediate bulk dispatch.</p>
+        </div>
+    </header>
+
+    <div class="sticky-filter-bar gs-reveal">
+        <div class="container">
+            <ul class="filters-desktop" id="filterContainer">
+                <li><button class="filter-link active">Loading...</button></li>
+            </ul>
+
+            <div class="filters-mobile">
+                <select class="mobile-select" id="mobileSelectContainer" onchange="window.filterProducts(this.value, null)">
+                    <option value="View All">View All</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <section class="container">
+        <div class="shop-grid" id="shopGrid">
+            <p style='text-align:center; grid-column: 1/-1; color: var(--text-light); font-size: 1.1rem;'>Synchronizing with current inventory...</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Bhakti Decor. Engineered for Scale.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: atob("QUl6YVN5QUoxU2VCZ05falNxMXgxUU9CQmVpcUR1SVpKcTliMDUw"),
+            authDomain: atob("Ymhha3RpLWRlY29yLmZpcmViYXNlYXBwLmNvbQ=="),
+            projectId: atob("Ymhha3RpLWRlY29y"),
+            messagingSenderId: atob("Mjg4MTU5NTA2ODgx"),
+            appId: atob("MToyODgxNTk1MDY4ODE6d2ViOjg4ZDY2NDA2YzA2NGFmOWNlZWNmNDA=")
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        let allProducts = [];
+
+        // Custom Cursor Logic
+        const dot = document.querySelector('.cursor-dot');
+        const circle = document.querySelector('.cursor-circle');
+
+        if(window.innerWidth > 768) {
+            window.addEventListener('mousemove', (e) => {
+                gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
+                gsap.to(circle, { x: e.clientX, y: e.clientY, duration: 0.15 });
+            });
+        }
+
+        function attachCursorHover() {
+            if(window.innerWidth > 768) {
+                document.querySelectorAll('a, button, .menu-toggle, .filter-link, select, .menu-close').forEach(el => {
+                    el.addEventListener('mouseenter', () => circle.classList.add('cursor-hover'));
+                    el.addEventListener('mouseleave', () => circle.classList.remove('cursor-hover'));
+                });
+            }
+        }
+
+        async function loadProducts() {
+            try {
+                const q = query(collection(db, "products"), where("isActive", "==", true));
+                const querySnapshot = await getDocs(q);
+                const uniqueCategories = new Set();
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const itemCats = data.categories || (data.category ? [data.category] : ['Uncategorized']);
+                    itemCats.forEach(c => uniqueCategories.add(c));
+                    allProducts.push({
+                        id: doc.id, title: data.name, categories: itemCats, primaryCat: itemCats[0],
+                        img: data.images && data.images.length > 0 ? data.images[0] : 'https://images.unsplash.com/photo-1618331835717-801e976710b2?w=800&q=80'
+                    });
+                });
+
+                renderFilters(Array.from(uniqueCategories));
+                renderProducts(allProducts);
+            } catch (error) {
+                console.error(error);
+                document.getElementById('shopGrid').innerHTML = "<p style='text-align:center; grid-column: 1/-1; color: #D32F2F;'>Failed to synchronize inventory.</p>";
+            }
+        }
+
+        function renderFilters(categories) {
+            const deskContainer = document.getElementById('filterContainer');
+            const mobContainer = document.getElementById('mobileSelectContainer');
+
+            deskContainer.innerHTML = `<li><button class="filter-link active" onclick="window.filterProducts('View All', this)">View All</button></li>`;
+            mobContainer.innerHTML = `<option value="View All">View All</option>`;
+
+            categories.sort().forEach(category => {
+                deskContainer.innerHTML += `<li><button class="filter-link" onclick="window.filterProducts('${category}', this)">${category}</button></li>`;
+                mobContainer.innerHTML += `<option value="${category}">${category}</option>`;
+            });
+            attachCursorHover();
+        }
+
+        function renderProducts(productList) {
+            const grid = document.getElementById('shopGrid');
+            grid.innerHTML = '';
+
+            productList.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.style.transitionDelay = `${(index % 12) * 0.08}s`;
+
+                // Note: The 'track-product' class and data attribute enable GA4 to track exactly which item is clicked
+                card.innerHTML = `
+                <a href="product.html?id=${product.id}" class="product-card-link track-product" data-product="${product.title}">
+                    <div class="product-img-wrapper">
+                        <img src="${product.img}" alt="${product.title}" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <span class="product-cat">${product.primaryCat}</span>
+                        <h3 class="product-title">${product.title}</h3>
+                    </div>
+                </a>
+                `;
+                grid.appendChild(card);
+
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                });
+            });
+            attachCursorHover();
+        }
+
+        window.filterProducts = function (category, btnElement) {
+            // GA4 Tracking: Filter usage
+            if(typeof gtag === 'function') {
+                gtag('event', 'select_item_list', { 'item_list_name': category });
+            }
+
+            if (btnElement) {
+                document.querySelectorAll('.filter-link').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
+                document.getElementById('mobileSelectContainer').value = category;
+            } else {
+                document.querySelectorAll('.filter-link').forEach(btn => {
+                    if (btn.innerText === category) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                });
+            }
+
+            if (category === 'View All') renderProducts(allProducts);
+            else renderProducts(allProducts.filter(p => p.categories.includes(category)));
+
+            window.scrollTo({ top: document.querySelector('.sticky-filter-bar').offsetTop - 20, behavior: 'smooth' });
+        };
+
+        window.toggleMenu = function () {
+            document.getElementById('mobileOverlay').classList.toggle('active');
+            document.body.style.overflow = document.body.style.overflow === 'hidden' ? 'auto' : 'hidden';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+        });
+
+        // GSAP Header Reveal
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.fromTo('.gs-reveal', { autoAlpha: 0, y: 40 }, { duration: 1.2, autoAlpha: 1, y: 0, ease: "power4.out", delay: 0.2 });
+
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        
+        // --- ADVANCED GA4 SCROLL TRACKING ---
+        let maxScrollMilestone = 0;
+        lenis.on('scroll', (e) => {
+            // Guard against division by zero on very short pages
+            if(e.dimensions.maxScroll === 0) return; 
+            
+            const scrollPercent = Math.round((e.animatedScroll / e.dimensions.maxScroll) * 100);
+            
+            if (scrollPercent > 24 && maxScrollMilestone < 25) { triggerScrollEvent(25); }
+            else if (scrollPercent > 49 && maxScrollMilestone < 50) { triggerScrollEvent(50); }
+            else if (scrollPercent > 74 && maxScrollMilestone < 75) { triggerScrollEvent(75); }
+            else if (scrollPercent > 98 && maxScrollMilestone < 100) { triggerScrollEvent(100); }
+        });
+
+        function triggerScrollEvent(depth) {
+            maxScrollMilestone = depth;
+            if(typeof gtag === 'function') {
+                gtag('event', 'scroll_depth_reached', { 'depth_percentage': depth });
+            }
+        }
+
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // --- GA4 EVENT DELEGATION TRACKING ---
+        document.addEventListener('click', (e) => {
+            // 1. Navigation Clicks
+            if(e.target.closest('nav .nav-links a') || e.target.closest('.mobile-overlay a')) {
+                const link = e.target.closest('a');
+                if(typeof gtag === 'function') {
+                    gtag('event', 'navigation_click', { 'menu_item': link.innerText });
+                }
+            }
+
+            // 2. Product Selection (Works on dynamically injected elements)
+            const productLink = e.target.closest('.track-product');
+            if(productLink) {
+                const productName = productLink.getAttribute('data-product');
+                if(typeof gtag === 'function') {
+                    gtag('event', 'select_item', { 
+                        'item_list_name': 'Shop Catalogue', 
+                        'item_name': productName 
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wholesale Collection | Premium Paper Decor | Bhakti Decor</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -713,4 +1166,4 @@
     </script>
 </body>
 
-</html>
+</html> -->

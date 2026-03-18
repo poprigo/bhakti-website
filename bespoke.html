@@ -6,6 +6,534 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Bespoke Manufacturing & Corporate Decor | Bhakti Decor</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J31VQKWW7S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // Configure basic settings & Page View
+        gtag('config', 'G-J31VQKWW7S', {
+            'send_page_view': true,
+            'page_title': 'Bespoke Manufacturing',
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+    <meta name="description"
+        content="Custom paper decor manufacturing, pantone matching, and white-label production for global distributors.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-brands/css/uicons-brands.css'>
+
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F8F8;
+            --bg-dark: #111111;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --accent: #B89768;
+            --border: rgba(0, 0, 0, 0.06);
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, a, button, .menu-toggle, input, textarea, select { cursor: none !important; }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .font-head { font-family: var(--font-head); font-weight: 700; text-transform: uppercase; }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        .container { max-width: 90vw; margin: 0 auto; }
+        .text-accent { color: var(--accent); }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot, .cursor-circle {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 9999;
+        }
+        .cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+        .cursor-circle {
+            width: 40px; height: 40px; border: 1px solid rgba(184, 151, 104, 0.5);
+            border-radius: 50%; transition: width 0.3s, height 0.3s, background 0.3s;
+        }
+        .cursor-hover { width: 70px; height: 70px; background: rgba(184, 151, 104, 0.1); border-color: transparent; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 5vw; display: flex;
+            justify-content: space-between; align-items: center; z-index: 100;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; text-transform: uppercase; position: relative; padding-bottom: 4px; }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px;
+            background: var(--accent); transition: width 0.4s;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a.active { color: var(--accent); }
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; z-index: 102; padding: 10px; }
+        .bar { width: 30px; height: 2px; background-color: var(--text-main); transition: 0.3s; }
+
+        /* --- MOBILE MENU --- */
+        .mobile-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a1a 100%); z-index: 101;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            gap: 2rem; transform: translateY(-100%); transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .mobile-overlay::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(var(--accent) 1.5px, transparent 1.5px);
+            background-size: 35px 35px; opacity: 0.07; pointer-events: none;
+        }
+        .mobile-overlay.active { transform: translateY(0); }
+        .menu-close {
+            position: absolute; top: 2rem; right: 5vw; font-size: 2.5rem; color: var(--bg-primary);
+            cursor: pointer; transition: transform 0.4s;
+        }
+        .menu-close:hover { transform: rotate(90deg); color: var(--accent); }
+        .mobile-links { font-family: var(--font-head); font-size: 3rem; color: var(--bg-primary); display: block; }
+
+        /* --- 1. EDITORIAL HERO --- */
+        .bespoke-hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative; background: var(--bg-secondary); overflow: hidden;
+        }
+        .hero-title-wrap { position: relative; z-index: 2; text-align: center; }
+        .bespoke-hero h1 { font-size: clamp(4rem, 15vw, 12rem); line-height: 0.85; letter-spacing: -6px; }
+        .hero-sub { margin-top: 2rem; max-width: 600px; font-weight: 500; color: var(--text-muted); margin-left: auto; margin-right: auto; }
+
+        /* --- 2. CAPABILITIES SHOWCASE (STAGGERED) --- */
+        .capabilities { padding: 15vh 0; }
+        .cap-masonry { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2vw; align-items: flex-start; }
+        .cap-item {
+            background: var(--bg-primary); padding: 4rem 3rem; border-radius: 24px;
+            border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: flex-end;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .cap-item:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 30px 60px rgba(184, 151, 104, 0.1); }
+        .cap-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 2rem; }
+        .cap-item h3 { font-size: 2rem; margin-bottom: 1rem; letter-spacing: -1px; }
+        .cap-item p { color: var(--text-muted); font-size: 1rem; }
+
+        .item-1 { grid-column: 1 / 7; min-height: 400px; }
+        .item-2 { grid-column: 7 / 13; min-height: 500px; margin-top: 10vh; }
+        .item-3 { grid-column: 2 / 8; min-height: 450px; }
+        .item-4 { grid-column: 8 / 13; min-height: 400px; margin-top: -5vh; }
+
+        /* --- 3. THE "BLUEPRINT" PROCESS --- */
+        .blueprint-section { background: var(--bg-dark); color: var(--bg-primary); padding: 15vh 5vw; }
+        .blueprint-header { margin-bottom: 8vh; }
+        .blueprint-header h2 { font-size: clamp(3rem, 6vw, 5rem); color: var(--accent); }
+        .blueprint-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .b-step { padding: 4rem 2rem; border-right: 1px solid rgba(255, 255, 255, 0.1); position: relative; }
+        .b-step:last-child { border-right: none; }
+        .b-num { font-family: var(--font-head); font-size: 1.2rem; color: var(--accent); margin-bottom: 2rem; display: block; }
+        .b-step h4 { margin-bottom: 1rem; }
+        .b-step p { color: #888; font-size: 0.9rem; }
+
+        /* --- 4. INQUIRY CARD --- */
+        .inquiry-section { padding: 15vh 0; background: var(--bg-secondary); }
+        .inquiry-card {
+            background: var(--bg-primary); border-radius: 30px; display: grid;
+            grid-template-columns: 1fr 1fr; overflow: hidden; box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
+        }
+        .inquiry-text { padding: 6rem 5vw; background: var(--bg-dark); color: #fff; }
+        .inquiry-text h2 { font-size: 3.5rem; line-height: 0.9; margin-bottom: 2rem; }
+        .inquiry-form-wrap { padding: 6rem 5vw; }
+
+        /* Modern Form Styling */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .form-group.full { grid-column: span 2; }
+        label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 0.8rem; display: block; }
+        .form-control {
+            width: 100%; background: var(--bg-secondary); border: 1px solid transparent;
+            padding: 1.2rem 1.5rem; border-radius: 12px; font-family: var(--font-body);
+            font-size: 1rem; transition: 0.3s;
+        }
+        .form-control:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); }
+
+        .btn-submit {
+            width: 100%; padding: 1.2rem; margin-top: 2rem; background: var(--bg-dark);
+            color: #fff; font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+            border: none; border-radius: 12px; transition: 0.4s;
+        }
+        .btn-submit:hover { background: var(--accent); transform: translateY(-5px); }
+
+        /* --- FOOTER --- */
+        footer { background: var(--bg-dark); color: var(--bg-primary); padding: 8rem 0 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .footer-logo { font-size: 2rem; font-family: var(--font-head); font-weight: 800; margin-bottom: 1rem; }
+        .footer-grid h4 { color: var(--accent); margin-bottom: 1.5rem; font-size: 1rem; font-family: var(--font-body); font-weight: 600; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid ul li { margin-bottom: 0.8rem; color: #aaa; font-size: 0.95rem; transition: color 0.3s; }
+        .footer-grid ul li:hover { color: var(--accent); }
+        .footer-bottom { font-size: 10vw; font-family: var(--font-head); font-weight: 800; text-align: center; line-height: 0.8; color: rgba(255, 255, 255, 0.05); margin-top: 4rem; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .cap-masonry { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+            .cap-item { grid-column: auto !important; margin: 0 !important; min-height: auto !important; }
+            .blueprint-grid { grid-template-columns: repeat(2, 1fr); }
+            .inquiry-card { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .blueprint-grid { grid-template-columns: 1fr; }
+            .b-step { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: span 1; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .cursor-dot, .cursor-circle { display: none; }
+            body, a, button, .menu-toggle, input, textarea, select { cursor: auto !important; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <nav aria-label="Main Navigation">
+        <a href="/" class="logo font-head">BHAKTI<span class="text-accent">.</span></a>
+        <div class="nav-links">
+            <a href="/" data-nav="Home">Home</a>
+            <a href="/shop" data-nav="Shop">Shop</a>
+            <a href="/wholesale" data-nav="Wholesale">Wholesale</a>
+            <a href="/bespoke" class="active" data-nav="Bespoke">Bespoke</a>
+            <a href="/about" data-nav="About">About</a>
+            <a href="/contact" data-nav="Contact">Contact</a>
+        </div>
+        <div class="menu-toggle" onclick="window.toggleMenu()" aria-label="Toggle Menu">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="menu-close" onclick="window.toggleMenu()">✕</div>
+        <a href="/" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Home Mobile">Home</a>
+        <a href="/shop" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Shop Mobile">Shop</a>
+        <a href="/wholesale" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Wholesale Mobile">Wholesale</a>
+        <a href="/bespoke" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Bespoke Mobile">Bespoke</a>
+        <a href="/about" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="About Mobile">About</a>
+        <a href="/contact" class="mobile-links hover-target" onclick="window.toggleMenu()" data-nav="Contact Mobile">Contact</a>
+    </div>
+
+    <header class="bespoke-hero">
+        <div class="hero-title-wrap gs-reveal">
+            <h1>BESPOKE</h1>
+            <p class="hero-sub">Direct factory partnership for proprietary retail rollouts, luxury branding, and
+                international event engineering. Crafted in Surat, delivered worldwide.</p>
+        </div>
+    </header>
+
+    <section class="capabilities container">
+        <div class="cap-masonry">
+            <div class="cap-item item-1 gs-reveal hover-target">
+                <i class="fi fi-rr-palette"></i>
+                <h3>Pantone Matching</h3>
+                <p>We dye our sustainable pulp to match your corporate DNA or seasonal retail palettes with absolute precision.</p>
+            </div>
+            <div class="cap-item item-2 gs-reveal hover-target">
+                <i class="fi fi-rr-tags"></i>
+                <h3>White Labeling</h3>
+                <p>Private manufacturing runs with custom barcode integration and proprietary branded packaging for global retail chains.</p>
+            </div>
+            <div class="cap-item item-3 gs-reveal hover-target">
+                <i class="fi fi-rr-star"></i>
+                <h3>Proprietary Tooling</h3>
+                <p>Beyond standard catalogs. We engineer custom die-cuts and unique structural formations exclusively for your inventory.</p>
+            </div>
+            <div class="cap-item item-4 gs-reveal hover-target">
+                <i class="fi fi-rr-shield-check"></i>
+                <h3>Fire Retardant</h3>
+                <p>Safety compliance at scale. Bulk treatments available to meet international fire safety standards for public venues.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="blueprint-section">
+        <div class="container">
+            <div class="blueprint-header gs-reveal">
+                <h2>THE WORKFLOW</h2>
+            </div>
+            <div class="blueprint-grid">
+                <div class="b-step gs-reveal">
+                    <span class="b-num">01</span>
+                    <h4>Consultation</h4>
+                    <p>Reviewing bulk volume targets, material specs, and container logistics.</p>
+                </div>
+                <div class="b-step gs-reveal">
+                    <span class="b-num">02</span>
+                    <h4>Prototyping</h4>
+                    <p>Express courier delivery of physical samples for structural and color sign-off.</p>
+                </div>
+                <div class="b-step gs-reveal">
+                    <span class="b-num">03</span>
+                    <h4>Production</h4>
+                    <p>Precision die-cutting and artisan assembly in our Surat manufacturing facility.</p>
+                </div>
+                <div class="b-step gs-reveal">
+                    <span class="b-num">04</span>
+                    <h4>Global Dispatch</h4>
+                    <p>Palletized loading and commercial documentation for international export.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="inquiry-section container">
+        <div class="inquiry-card gs-reveal">
+            <div class="inquiry-text">
+                <h2>INITIATE <br>PRODUCTION</h2>
+                <p style="margin-top: 2rem; color: #888;">Partner with our engineering team for high-volume custom
+                    manufacturing runs. We prioritize distribution-scale inquiries.</p>
+                <div style="margin-top: 4rem;">
+                    <p style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent);">
+                        Direct Facility</p>
+                    <p style="font-family: var(--font-head); font-size: 1.5rem;">Surat, Gujarat, India</p>
+                </div>
+            </div>
+            <div class="inquiry-form-wrap">
+                <form id="bespokeForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" id="fname" class="form-control hover-target track-form-start" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" id="lname" class="form-control hover-target" required>
+                        </div>
+                        <div class="form-group full">
+                            <label>Organization</label>
+                            <input type="text" id="org" class="form-control hover-target" required>
+                        </div>
+                        <div class="form-group full">
+                            <label>Corporate Email</label>
+                            <input type="email" id="email" class="form-control hover-target" required>
+                        </div>
+                        <div class="form-group full">
+                            <label>Custom Requirements</label>
+                            <textarea id="reqs" class="form-control hover-target" rows="4"
+                                placeholder="Detail your target volumes and design specs..." required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" id="submitBtn" class="btn-submit hover-target">Request Manufacturing
+                        Quote</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid gs-reveal">
+                <div>
+                    <div class="footer-logo">BHAKTI<span class="text-accent">.</span></div>
+                    <p style="color:#aaa; max-width: 300px;">Engineered to make your most important moments look as
+                        beautiful as they feel, at any scale.</p>
+                </div>
+                <div>
+                    <h4>Bulk Collections</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="/shop" class="hover-target">Honeycomb Balls</a></li>
+                        <li><a href="/shop" class="hover-target">Paper Stars</a></li>
+                        <li><a href="/shop" class="hover-target">Garlands</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Partnership</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="/about" class="hover-target">Our Story</a></li>
+                        <li><a href="/wholesale" class="hover-target">Wholesale Orders</a></li>
+                        <li><a href="/bespoke" class="hover-target">Bespoke Manufacturing</a></li>
+                        <li><a href="/contact" class="hover-target">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Connect</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="#" class="hover-target">Instagram</a></li>
+                        <li><a href="#" class="hover-target">LinkedIn</a></li>
+                        <li><a href="#" class="hover-target">WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom gs-reveal">BHAKTI DECOR</div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // Obfuscated keys
+        const firebaseConfig = {
+            apiKey: atob("QUl6YVN5QUoxU2VCZ05falNxMXgxUU9CQmVpcUR1SVpKcTliMDUw"),
+            authDomain: atob("Ymhha3RpLWRlY29yLmZpcmViYXNlYXBwLmNvbQ=="),
+            projectId: atob("Ymhha3RpLWRlY29y"),
+            messagingSenderId: atob("Mjg4MTU5NTA2ODgx"),
+            appId: atob("MToyODgxNTk1MDY4ODE6d2ViOjg4ZDY2NDA2YzA2NGFmOWNlZWNmNDA=")
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        document.getElementById('bespokeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = 'Transmitting...';
+            btn.disabled = true;
+
+            const orgName = document.getElementById('org').value;
+
+            try {
+                await addDoc(collection(db, "bespoke_inquiries"), {
+                    firstName: document.getElementById('fname').value,
+                    lastName: document.getElementById('lname').value,
+                    organization: orgName,
+                    email: document.getElementById('email').value,
+                    message: document.getElementById('reqs').value,
+                    timestamp: serverTimestamp()
+                });
+                
+                // GA4: Track Lead
+                if(typeof gtag === 'function') {
+                    gtag('event', 'generate_lead', { 
+                        'lead_source': 'Bespoke Form',
+                        'company_name': orgName
+                    });
+                }
+
+                btn.innerText = 'Transmission Successful';
+                document.getElementById('bespokeForm').reset();
+            } catch (e) { 
+                btn.innerText = 'Error. Try Again.'; 
+                btn.disabled = false; 
+            }
+        });
+    </script>
+
+    <script>
+        // Form Start Tracking
+        const firstInput = document.querySelector('.track-form-start');
+        if (firstInput) {
+            firstInput.addEventListener('focus', function trackFormStart() {
+                if(typeof gtag === 'function') gtag('event', 'form_start', { 'form_name': 'Bespoke Request' });
+                firstInput.removeEventListener('focus', trackFormStart); // Ensure it only fires once
+            });
+        }
+
+        // Smooth Scroll & Advanced GA4 Scroll Tracking
+        const lenis = new Lenis({ duration: 1.2 });
+        let maxScrollMilestone = 0;
+        
+        lenis.on('scroll', (e) => {
+            if(e.dimensions.maxScroll === 0) return;
+            const scrollPercent = Math.round((e.animatedScroll / e.dimensions.maxScroll) * 100);
+            
+            if (scrollPercent > 24 && maxScrollMilestone < 25) { triggerScrollEvent(25); }
+            else if (scrollPercent > 49 && maxScrollMilestone < 50) { triggerScrollEvent(50); }
+            else if (scrollPercent > 74 && maxScrollMilestone < 75) { triggerScrollEvent(75); }
+            else if (scrollPercent > 98 && maxScrollMilestone < 100) { triggerScrollEvent(100); }
+        });
+
+        function triggerScrollEvent(depth) {
+            maxScrollMilestone = depth;
+            if(typeof gtag === 'function') {
+                gtag('event', 'scroll_depth_reached', { 'depth_percentage': depth, 'page_name': 'Bespoke' });
+            }
+        }
+
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // Mobile Menu Toggle
+        window.toggleMenu = () => {
+            document.getElementById('mobileOverlay').classList.toggle('active');
+            document.body.style.overflow = document.body.style.overflow === 'hidden' ? 'auto' : 'hidden';
+        };
+
+        // Custom Cursor & Interaction Binding
+        if(window.innerWidth > 768) {
+            const dot = document.querySelector('.cursor-dot');
+            const circle = document.querySelector('.cursor-circle');
+            window.addEventListener('mousemove', (e) => {
+                gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
+                gsap.to(circle, { x: e.clientX, y: e.clientY, duration: 0.15 });
+            });
+            document.querySelectorAll('a, button, .hover-target, input, textarea, select, .menu-toggle, .menu-close').forEach(el => {
+                el.addEventListener('mouseenter', () => circle.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => circle.classList.remove('cursor-hover'));
+            });
+        }
+
+        // GSAP Registration
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Reveals
+        document.querySelectorAll('.gs-reveal').forEach((elem) => {
+            gsap.fromTo(elem, { autoAlpha: 0, y: 60 }, { duration: 1.2, autoAlpha: 1, y: 0, ease: "power4.out", scrollTrigger: { trigger: elem, start: "top 85%" } });
+        });
+
+        // Event Delegation for Clicks (Nav & Footer)
+        document.addEventListener('click', (e) => {
+            // Navigation
+            if(e.target.closest('nav .nav-links a') || e.target.closest('.mobile-overlay a')) {
+                const link = e.target.closest('a');
+                if(typeof gtag === 'function') gtag('event', 'navigation_click', { 'menu_item': link.getAttribute('data-nav') || link.innerText });
+            }
+            
+            // Footer Links
+            if(e.target.closest('.footer-track-list a')) {
+                if(typeof gtag === 'function') gtag('event', 'footer_link_click', { 'link_text': e.target.innerText });
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bespoke Manufacturing & Corporate Decor | Bhakti Decor</title>
     <meta name="description"
         content="Custom paper decor manufacturing, pantone matching, and white-label production for global distributors.">
 
@@ -850,4 +1378,4 @@
     </script>
 </body>
 
-</html>
+</html> -->

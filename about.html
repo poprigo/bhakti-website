@@ -6,6 +6,979 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Our Story | Premium Paper Decor Manufacturer | Bhakti Decor</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J31VQKWW7S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // Configure basic settings & Page View
+        gtag('config', 'G-J31VQKWW7S', {
+            'send_page_view': true,
+            'page_title': 'About Us',
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+    <meta name="description"
+        content="Discover the story behind Bhakti Decor. Based in Surat, Gujarat, we are manufacturers and artisans dedicated to crafting sustainable paper decor for global imports.">
+    <link rel="canonical" href="https://www.bhaktidecor.com/about">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-brands/css/uicons-brands.css'>
+
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F4F4F4;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --text-light: #999999;
+            --accent: #B89768;
+            --border: rgba(0, 0, 0, 0.08);
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        a,
+        button,
+        .menu-toggle {
+            cursor: none !important;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-head {
+            font-family: var(--font-head);
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        .container {
+            max-width: 90vw;
+            margin: 0 auto;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot,
+        .cursor-circle {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .cursor-circle {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(184, 151, 104, 0.5);
+            border-radius: 50%;
+            transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+        }
+
+        .cursor-hover {
+            width: 70px;
+            height: 70px;
+            background: rgba(184, 151, 104, 0.1);
+            border-color: transparent;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            font-family: var(--font-head);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 102;
+            padding: 10px;
+        }
+
+        .bar {
+            width: 30px;
+            height: 2px;
+            background-color: var(--text-main);
+            transition: 0.3s;
+        }
+
+        /* --- MOBILE MENU --- */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--text-main) 0%, #1a1a1a 100%);
+            z-index: 101;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            transform: translateY(-100%);
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .mobile-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--accent) 1.5px, transparent 1.5px);
+            background-size: 35px 35px;
+            opacity: 0.07;
+            pointer-events: none;
+        }
+
+        .mobile-overlay.active {
+            transform: translateY(0);
+        }
+
+        .menu-close {
+            position: absolute;
+            top: 2rem;
+            right: 5vw;
+            font-size: 2.5rem;
+            color: var(--bg-primary);
+            font-family: var(--font-body);
+            font-weight: 300;
+            transition: transform 0.4s ease, color 0.3s;
+        }
+
+        .menu-close:hover {
+            transform: rotate(90deg);
+            color: var(--accent);
+        }
+
+        .mobile-link-wrapper {
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mobile-links {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--bg-primary);
+            display: block;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .mobile-overlay.active .mobile-links {
+            transform: translateY(0);
+        }
+
+        .mobile-links:hover {
+            color: var(--accent);
+        }
+
+        /* --- 1. NEW CONCEPT: CINEMATIC HERO --- */
+        .editorial-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 5vh;
+            padding-top: 15vh;
+        }
+
+        .editorial-hero-content {
+            padding: 0 5vw;
+            margin-bottom: 5vh;
+        }
+
+        .editorial-hero-content span {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .editorial-hero-content h1 {
+            font-size: clamp(3rem, 8vw, 8rem);
+            line-height: 0.9;
+            letter-spacing: -3px;
+            max-width: 90vw;
+            text-transform: uppercase;
+        }
+
+        .hero-banner-img {
+            width: 90vw;
+            margin: 0 auto;
+            height: 60vh;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- 2. NEW CONCEPT: STICKY NARRATIVE SCROLL --- */
+        .sticky-narrative {
+            padding: 15vh 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 5vw;
+            position: relative;
+        }
+
+        .sidebar-index {
+            width: 25%;
+            position: sticky;
+            top: 20vh;
+            /* Sticks near the top as right side scrolls */
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 3vw, 3rem);
+            color: var(--text-light);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .sidebar-index .active-chapter {
+            color: var(--text-main);
+            transition: color 0.5s ease;
+        }
+
+        .scroll-content {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 20vh;
+            /* Massive spacing for editorial feel */
+        }
+
+        .story-chapter {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .story-chapter h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            line-height: 1;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .story-chapter p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            max-width: 800px;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-img {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+
+        /* Varied aspect ratios for an asymmetrical editorial look */
+        .chapter-img.tall {
+            aspect-ratio: 3/4;
+            width: 80%;
+            margin-left: auto;
+        }
+
+        .chapter-img.wide {
+            aspect-ratio: 16/9;
+        }
+
+        .chapter-img.square {
+            aspect-ratio: 1/1;
+            width: 70%;
+        }
+
+        /* --- 3. NEW CONCEPT: SCRUBBED MANIFESTO --- */
+        .manifesto-section {
+            padding: 25vh 5vw;
+            background: var(--text-main);
+            color: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .manifesto-text {
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 5vw, 5rem);
+            line-height: 1.1;
+            letter-spacing: -1px;
+            max-width: 1200px;
+        }
+
+        /* Each word will be wrapped in a span by JS and faded out initially */
+        .manifesto-word {
+            opacity: 0.15;
+            transition: opacity 0.1s;
+        }
+
+        .signature-block {
+            margin-top: 5rem;
+            opacity: 0;
+        }
+
+        .founder-name {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        /* --- 4. NEW CONCEPT: ASYMMETRICAL ATELIER --- */
+        .atelier {
+            padding: 15vh 0;
+        }
+
+        .atelier-header {
+            text-align: center;
+            margin-bottom: 8vh;
+        }
+
+        .atelier-header h2 {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            letter-spacing: -2px;
+        }
+
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2vw;
+            padding: 0 5vw;
+        }
+
+        .m-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+
+        /* Complex Grid Placements */
+        .m-item-1 {
+            grid-column: 1 / 8;
+            aspect-ratio: 4/3;
+        }
+
+        .m-item-2 {
+            grid-column: 8 / 13;
+            aspect-ratio: 3/4;
+            margin-top: 10vh;
+        }
+
+        .m-item-3 {
+            grid-column: 3 / 11;
+            aspect-ratio: 16/9;
+            margin-top: -5vh;
+            z-index: 2;
+            border: 10px solid var(--bg-primary);
+        }
+
+        .m-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            background: var(--bg-primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        /* --- 5. FOOTER --- */
+        footer {
+            background: var(--text-main);
+            color: var(--bg-primary);
+            padding: 6rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-family: var(--font-head);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .footer-grid h4 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+
+        .footer-grid ul {
+            list-style: none;
+        }
+
+        .footer-grid ul li {
+            margin-bottom: 0.8rem;
+            color: #aaa;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-grid ul li:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            font-size: 10vw;
+            font-family: var(--font-head);
+            font-weight: 800;
+            text-align: center;
+            line-height: 0.8;
+            color: rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .sticky-narrative {
+                flex-direction: column;
+                gap: 10vh;
+            }
+
+            .sidebar-index {
+                width: 100%;
+                position: relative;
+                top: 0;
+                display: flex;
+                gap: 1rem;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .scroll-content {
+                width: 100%;
+                gap: 10vh;
+            }
+
+            .chapter-img.tall,
+            .chapter-img.square {
+                width: 100%;
+            }
+
+            .m-item {
+                grid-column: 1 / -1 !important;
+                aspect-ratio: 4/3 !important;
+                margin-top: 0 !important;
+                border: none !important;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .cursor-dot,
+            .cursor-circle {
+                display: none;
+            }
+
+            /* Hide custom cursor on mobile */
+            body,
+            a,
+            button,
+            .menu-toggle {
+                cursor: auto !important;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <nav aria-label="Main Navigation">
+        <a href="/" class="logo">BHAKTI<span class="text-accent">.</span></a>
+        <div class="nav-links">
+            <a href="/" data-nav="Home">Home</a>
+            <a href="/shop" data-nav="Shop">Shop</a>
+            <a href="/wholesale" data-nav="Wholesale">Wholesale</a>
+            <a href="/bespoke" data-nav="Bespoke">Bespoke</a>
+            <a href="/about" class="active" data-nav="About">About</a>
+            <a href="/contact" data-nav="Contact">Contact</a>
+        </div>
+        <div class="menu-toggle" onclick="window.toggleMenu()">
+            <span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="menu-close" onclick="window.toggleMenu()">✕</div>
+        <div class="mobile-link-wrapper"><a href="/" class="mobile-links" onclick="window.toggleMenu()" data-nav="Home Mobile">Home</a></div>
+        <div class="mobile-link-wrapper"><a href="/shop" class="mobile-links" onclick="window.toggleMenu()" data-nav="Shop Mobile">Shop</a>
+        </div>
+        <div class="mobile-link-wrapper"><a href="/wholesale" class="mobile-links"
+                onclick="window.toggleMenu()" data-nav="Wholesale Mobile">Wholesale</a></div>
+        <div class="mobile-link-wrapper"><a href="/bespoke" class="mobile-links"
+                onclick="window.toggleMenu()" data-nav="Bespoke Mobile">Bespoke</a></div>
+        <div class="mobile-link-wrapper"><a href="/about" class="mobile-links" onclick="window.toggleMenu()" data-nav="About Mobile">About</a>
+        </div>
+        <div class="mobile-link-wrapper"><a href="/contact" class="mobile-links"
+                onclick="window.toggleMenu()" data-nav="Contact Mobile">Contact</a></div>
+    </div>
+
+    <header class="editorial-hero">
+        <div class="editorial-hero-content gs-reveal">
+            <span>The Manufacturer's Origin</span>
+            <h1>In Devotion To <br>The Transient Moment.</h1>
+        </div>
+        <div class="hero-banner-img gs-reveal">
+            <img src="./images/about/texture.jpg" class="parallax-img" alt="Premium Paper Texture">
+        </div>
+    </header>
+
+    <section class="sticky-narrative container">
+
+        <div class="sidebar-index">
+            <div class="chapter-link active-chapter" id="link-ch1">01. Name</div>
+            <div class="chapter-link" id="link-ch2">02. Medium</div>
+            <div class="chapter-link" id="link-ch3">03. Roots</div>
+            <div class="chapter-link" id="link-ch4">04. Scale</div>
+        </div>
+
+        <div class="scroll-content">
+
+            <div class="story-chapter" id="ch1">
+                <div class="chapter-text gs-reveal">
+                    <h2>Why 'Bhakti'?</h2>
+                    <p>In ancient Sanskrit, <i>Bhakti</i> translates to devotion, participation, and love. It is the
+                        surrender of the self to something greater.</p>
+                    <p>We chose this name because we believe celebration is a form of worship. Whether it is a corporate
+                        gala or a retail launch, transforming a space is an act of intention. It is a way of declaring,
+                        "This moment matters."</p>
+                </div>
+                <div class="chapter-img tall gs-reveal">
+                    <img src="./images/about/paper_folding.jpg" class="parallax-img" alt="Paper Crafting">
+                </div>
+            </div>
+
+            <div class="story-chapter" id="ch2">
+                <div class="chapter-text gs-reveal">
+                    <h2>The Humility of Paper</h2>
+                    <p>In a world obsessed with heavy plastics, we chose paper. Because paper is alive. It breathes. It
+                        has grain, texture, and structural integrity.</p>
+                    <p>Our decor is engineered to withstand the rigorous logistics of global import, yet it remains
+                        fundamentally organic—designed to captivate environments with zero environmental guilt.</p>
+                </div>
+                <div class="chapter-img wide gs-reveal">
+                    <img src="https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?q=80&w=2574&auto=format&fit=crop"
+                        class="parallax-img" alt="Paper Medium">
+                </div>
+            </div>
+
+            <div class="story-chapter" id="ch3">
+                <div class="chapter-text gs-reveal">
+                    <h2>From Porbandar to Surat</h2>
+                    <p>Our story begins in the coastal quiet of Amar, Porbandar, and finds its industrial heartbeat in
+                        Surat. Founded by Ankit Detroja, Bhakti Decor is deeply rooted in Gujarat’s legendary history of
+                        trade and craftsmanship.</p>
+                    <p>We brought together generations of artisanal knowledge and paired it with state-of-the-art
+                        manufacturing precision to dominate the global market.</p>
+                </div>
+                <div class="chapter-img square gs-reveal">
+                    <img src="https://images.unsplash.com/photo-1544457070-4cd773b4d71e?q=80&w=2600&auto=format&fit=crop"
+                        class="parallax-img" alt="Surat Origins">
+                </div>
+            </div>
+
+            <div class="story-chapter" id="ch4">
+                <div class="chapter-text gs-reveal">
+                    <h2>Engineered for Global Import</h2>
+                    <p>We do not just create art; we engineer supply chains. We understand the precise demands of
+                        international distributors and large-scale retailers.</p>
+                    <p>Our manufacturing processes are strictly optimized for high-volume wholesale, ensuring every unit
+                        maintains flawless structural consistency upon arrival.</p>
+                </div>
+                <div class="chapter-img wide gs-reveal">
+                    <img src="https://images.unsplash.com/photo-1603484435645-5626ccf24b0f?q=80&w=2670&auto=format&fit=crop"
+                        class="parallax-img" alt="Global Supply Chain">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="manifesto-section">
+        <div class="manifesto-text" id="splitTextTarget">
+            We are the architects of joy. We manufacture the silence before the applause, and the color behind the
+            laughter. We are Bhakti Decor.
+        </div>
+        <div class="signature-block">
+            <img src="./images/signature.png" alt="Founder Signature"
+                style="width: 150px; filter: invert(1); opacity: 0.9;">
+            <div class="founder-name">Ankit Detroja, Founder</div>
+        </div>
+    </section>
+
+    <section class="atelier">
+        <div class="atelier-header gs-reveal">
+            <h2>Inside Our Surat Atelier</h2>
+        </div>
+        <div class="masonry-grid">
+            <div class="m-item m-item-1 gs-reveal">
+                <img src="./images/about/process_1.jpg" class="parallax-img" alt="Steam Dyeing">
+                <div class="m-caption">Steam Dyeing</div>
+            </div>
+            <div class="m-item m-item-2 gs-reveal">
+                <img src="./images/about/process_2.jpg" class="parallax-img" alt="Precision Cutting">
+                <div class="m-caption">Precision Cutting</div>
+            </div>
+            <div class="m-item m-item-3 gs-reveal">
+                <img src="./images/about/process_3.jpg" class="parallax-img" alt="Assembly">
+                <div class="m-caption">Structured Assembly</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid gs-reveal">
+                <div>
+                    <div class="footer-logo">BHAKTI<span class="text-accent">.</span></div>
+                    <p style="color:#aaa; max-width: 300px;">Engineered to make your most important moments look as
+                        beautiful as they feel, at any scale.</p>
+                </div>
+                <div>
+                    <h4>Collections</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="/shop" class="hover-target">Honeycomb Balls</a></li>
+                        <li><a href="/shop" class="hover-target">Paper Stars</a></li>
+                        <li><a href="/shop" class="hover-target">Garlands</a></li>
+                        <li><a href="/shop" class="hover-target">Table Decor</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="/about" class="hover-target">Our Story</a></li>
+                        <li><a href="/wholesale" class="hover-target">Wholesale Orders</a></li>
+                        <li><a href="/bespoke" class="hover-target">Bespoke Manufacturing</a></li>
+                        <li><a href="/contact" class="hover-target">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Connect</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="#" class="hover-target">Instagram</a></li>
+                        <li><a href="#" class="hover-target">LinkedIn</a></li>
+                        <li><a href="#" class="hover-target">Pinterest</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom gs-reveal">BHAKTI DECOR</div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <script>
+        // Custom Cursor Logic
+        if(window.innerWidth > 768) {
+            const dot = document.querySelector('.cursor-dot');
+            const circle = document.querySelector('.cursor-circle');
+
+            window.addEventListener('mousemove', (e) => {
+                gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
+                gsap.to(circle, { x: e.clientX, y: e.clientY, duration: 0.15 });
+            });
+
+            document.querySelectorAll('a, button, .menu-toggle, .hover-target, .menu-close, .chapter-link').forEach(el => {
+                el.addEventListener('mouseenter', () => circle.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => circle.classList.remove('cursor-hover'));
+            });
+        }
+
+        // Smooth Scroll & Advanced GA4 Scroll Tracking
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        
+        let maxScrollMilestone = 0;
+        lenis.on('scroll', (e) => {
+            if(e.dimensions.maxScroll === 0) return;
+
+            const scrollPercent = Math.round((e.animatedScroll / e.dimensions.maxScroll) * 100);
+            
+            if (scrollPercent > 24 && maxScrollMilestone < 25) { triggerScrollEvent(25); }
+            else if (scrollPercent > 49 && maxScrollMilestone < 50) { triggerScrollEvent(50); }
+            else if (scrollPercent > 74 && maxScrollMilestone < 75) { triggerScrollEvent(75); }
+            else if (scrollPercent > 98 && maxScrollMilestone < 100) { triggerScrollEvent(100); }
+        });
+
+        function triggerScrollEvent(depth) {
+            maxScrollMilestone = depth;
+            if(typeof gtag === 'function') {
+                gtag('event', 'scroll_depth_reached', { 'depth_percentage': depth, 'page_name': 'About Us' });
+            }
+        }
+
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // Mobile Menu Toggle
+        window.toggleMenu = function() {
+            document.getElementById('mobileOverlay').classList.toggle('active');
+            document.body.style.overflow = document.body.style.overflow === 'hidden' ? 'auto' : 'hidden';
+        };
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Section Reveal Animations
+        document.querySelectorAll('.gs-reveal').forEach((elem) => {
+            gsap.fromTo(elem,
+                { autoAlpha: 0, y: 60 },
+                {
+                    duration: 1.2, autoAlpha: 1, y: 0, ease: "power4.out",
+                    scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none reverse" }
+                }
+            );
+        });
+
+        // Parallax Image Effect
+        document.querySelectorAll('.parallax-img').forEach((img) => {
+            gsap.fromTo(img,
+                { y: "-10%" },
+                {
+                    y: "10%", ease: "none",
+                    scrollTrigger: { trigger: img.parentElement, scrub: true }
+                }
+            );
+        });
+
+        // Sticky Chapter Highlighting
+        const chapters = ['ch1', 'ch2', 'ch3', 'ch4'];
+        chapters.forEach(id => {
+            ScrollTrigger.create({
+                trigger: `#${id}`,
+                start: "top center",
+                end: "bottom center",
+                onToggle: self => {
+                    if (self.isActive) {
+                        document.querySelectorAll('.chapter-link').forEach(l => l.classList.remove('active-chapter'));
+                        document.getElementById(`link-${id}`).classList.add('active-chapter');
+                        
+                        // GA4 Track reading progress
+                        if(typeof gtag === 'function' && !document.getElementById(`link-${id}`).hasAttribute('data-tracked')) {
+                            gtag('event', 'chapter_read', { 'chapter_id': id });
+                            document.getElementById(`link-${id}`).setAttribute('data-tracked', 'true');
+                        }
+                    }
+                }
+            });
+        });
+
+        // ADVANCED: Text Scrub Reveal
+        const textTarget = document.getElementById('splitTextTarget');
+        if(textTarget) {
+            const words = textTarget.innerText.split(' ');
+            textTarget.innerHTML = ''; 
+
+            words.forEach(word => {
+                const span = document.createElement('span');
+                span.className = 'manifesto-word';
+                span.innerText = word + ' ';
+                textTarget.appendChild(span);
+            });
+
+            const wordSpans = document.querySelectorAll('.manifesto-word');
+
+            gsap.to(wordSpans, {
+                opacity: 1,
+                stagger: 0.1,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".manifesto-section",
+                    start: "top 60%",
+                    end: "center center",
+                    scrub: 1 
+                }
+            });
+        }
+
+        // Reveal Signature after text
+        gsap.to('.signature-block', {
+            autoAlpha: 1, y: 0,
+            scrollTrigger: { trigger: ".manifesto-section", start: "center center", toggleActions: "play none none reverse" }
+        });
+
+        // --- GA4 EVENT LISTENERS BINDING ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Navigation Clicks
+            document.querySelectorAll('nav .nav-links a, .mobile-overlay a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const destination = e.target.getAttribute('data-nav') || e.target.innerText;
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'navigation_click', { 'menu_item': destination });
+                    }
+                });
+            });
+
+            // Footer Links
+            document.querySelectorAll('.footer-track-list a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const linkName = e.target.innerText;
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'footer_link_click', { 'link_text': linkName });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Story | Premium Paper Decor Manufacturer | Bhakti Decor</title>
     <meta name="description"
         content="Discover the story behind Bhakti Decor. Based in Surat, Gujarat, we are manufacturers and artisans dedicated to crafting sustainable paper decor for global imports.">
     <link rel="canonical" href="https://www.bhaktidecor.com/about">
@@ -894,4 +1867,4 @@
     </script>
 </body>
 
-</html>
+</html> -->

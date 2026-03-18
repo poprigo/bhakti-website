@@ -6,6 +6,704 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhakti Decor | Ultra-Premium Paper Decor Manufacturer</title>
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J31VQKWW7S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // Configure basic settings
+        gtag('config', 'G-J31VQKWW7S', {
+            'send_page_view': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F4F4F4;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --accent: #B89768;
+            --border: rgba(0, 0, 0, 0.08);
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+            --spacing-xl: 15vh;
+            --spacing-lg: 10vh;
+        }
+
+        /* --- RESET & UTILS --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, a, button, .menu-toggle { cursor: none !important; }
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, .font-head { font-family: var(--font-head); }
+        a { text-decoration: none; color: inherit; }
+        img { width: 100%; height: 100%; display: block; object-fit: cover; }
+        .container { max-width: 90vw; margin: 0 auto; }
+        .text-accent { color: var(--accent); }
+
+        .btn {
+            display: inline-block; padding: 1rem 2.5rem; background: var(--text-main);
+            color: var(--bg-primary); font-family: var(--font-head); text-transform: uppercase;
+            letter-spacing: 1px; font-size: 0.85rem; font-weight: 600; border-radius: 50px;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .btn:hover { background: var(--accent); transform: translateY(-3px); }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot, .cursor-circle {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 9999;
+        }
+        .cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+        .cursor-circle {
+            width: 40px; height: 40px; border: 1px solid rgba(184, 151, 104, 0.5);
+            border-radius: 50%; transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+        }
+        .cursor-hover { width: 70px; height: 70px; background: rgba(184, 151, 104, 0.1); border-color: transparent; }
+
+        /* --- 1. NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 5vw; display: flex;
+            justify-content: space-between; align-items: center; z-index: 100;
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a {
+            font-size: 0.85rem; font-weight: 500; text-transform: uppercase;
+            position: relative; padding-bottom: 4px;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0%;
+            height: 2px; background: var(--accent); transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- MOBILE MENU --- */
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; z-index: 102; padding: 10px; }
+        .bar { width: 30px; height: 2px; background-color: var(--text-main); transition: 0.3s; }
+
+        .mobile-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(135deg, var(--text-main) 0%, #1a1a1a 100%);
+            z-index: 101; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; gap: 2rem; transform: translateY(-100%);
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .mobile-overlay::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(var(--accent) 1.5px, transparent 1.5px);
+            background-size: 35px 35px; opacity: 0.07; pointer-events: none;
+        }
+        .mobile-overlay.active { transform: translateY(0); }
+        .menu-close {
+            position: absolute; top: 2rem; right: 5vw; font-size: 2.5rem;
+            color: var(--bg-primary); font-family: var(--font-body); font-weight: 300;
+            transition: transform 0.4s ease, color 0.3s;
+        }
+        .menu-close:hover { transform: rotate(90deg); color: var(--accent); }
+        .mobile-link-wrapper { overflow: hidden; position: relative; z-index: 2; }
+        .mobile-links {
+            font-family: var(--font-head); font-size: 3rem; color: var(--bg-primary);
+            display: block; transform: translateY(100%); transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .mobile-overlay.active .mobile-links { transform: translateY(0); }
+        .mobile-links:hover { color: var(--accent); }
+        .mobile-link-wrapper:nth-child(2) .mobile-links { transition-delay: 0.1s; }
+        .mobile-link-wrapper:nth-child(3) .mobile-links { transition-delay: 0.2s; }
+        .mobile-link-wrapper:nth-child(4) .mobile-links { transition-delay: 0.3s; }
+        .mobile-link-wrapper:nth-child(5) .mobile-links { transition-delay: 0.4s; }
+        .mobile-link-wrapper:nth-child(6) .mobile-links { transition-delay: 0.5s; }
+
+        /* --- 2. HERO --- */
+        .hero { height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+        .hero-content { width: 50%; padding-right: 5vw; z-index: 2; }
+        .hero h1 { font-size: clamp(3.5rem, 6vw, 7rem); line-height: 0.9; letter-spacing: -2px; margin-bottom: 2rem; }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 80%; }
+        .hero-img-wrapper { width: 50%; height: 80vh; border-radius: 20px; overflow: hidden; position: relative; }
+        .hero-img-wrapper img { width: 100%; height: 120%; object-fit: cover; }
+
+        /* --- 3. INTRO / STATEMENT --- */
+        .intro { padding: var(--spacing-xl) 0; text-align: center; }
+        .intro p { font-size: clamp(2rem, 4vw, 3.5rem); font-family: var(--font-head); line-height: 1.2; max-width: 1200px; margin: 0 auto; }
+
+        /* --- 4. FEATURES (BENTO GRID) --- */
+        .features { padding: var(--spacing-lg) 0; background: var(--bg-secondary); }
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .bento-item { background: var(--bg-primary); padding: 3rem; border-radius: 20px; border: 1px solid var(--border); transition: transform 0.4s; }
+        .bento-item:hover { transform: translateY(-10px); }
+        .feature-num { font-size: 0.85rem; font-weight: 600; color: var(--accent); margin-bottom: 2rem; display: block; }
+        .bento-item h3 { font-size: 1.8rem; line-height: 1.1; }
+
+        /* --- 5. CATEGORIES (SQUARE ASPECT RATIO) --- */
+        .categories { padding: var(--spacing-xl) 0; }
+        .section-header { margin-bottom: 4rem; }
+        .section-header span { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; }
+        .section-header h2 { font-size: 4rem; letter-spacing: -1px; }
+        .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .cat-item { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1 / 1; background: var(--bg-secondary); border: 1px solid var(--border); }
+        .cat-item:nth-child(even) { margin-top: 5rem; }
+        .cat-item img { transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); width: 100%; height: 100%; object-fit: cover; }
+        .cat-item:hover img { transform: scale(1.08); }
+        .cat-label { position: absolute; bottom: 2rem; left: 2rem; background: var(--bg-primary); padding: 1rem 2rem; border-radius: 50px; font-family: var(--font-head); font-size: 1.2rem; font-weight: 600; }
+
+        /* --- 6. CRAFTSMANSHIP --- */
+        .craft { padding: var(--spacing-lg) 0; border-top: 1px solid var(--border); }
+        .craft-wrap { display: flex; gap: 5vw; align-items: center; }
+        .craft-img { width: 50%; border-radius: 20px; overflow: hidden; aspect-ratio: 1/1; background: var(--bg-secondary); position: relative; }
+        .craft-img img { width: 100%; height: 120%; object-fit: cover; }
+        .craft-text { width: 50%; }
+        .craft-text h2 { font-size: 3.5rem; margin-bottom: 2rem; }
+        .stats { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+        .stat h4 { font-size: 3rem; color: var(--text-main); line-height: 1; }
+        .stat span { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+
+        /* --- 7. BEST SELLERS --- */
+        .products { padding: var(--spacing-lg) 0; background: var(--bg-secondary); }
+        .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; row-gap: 4rem; }
+        .prod-card .img-box { aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; margin-bottom: 1.5rem; background: var(--border); position: relative; }
+        .prod-card h4 { font-size: 1.1rem; font-weight: 500; }
+
+        /* --- 8. BESPOKE BANNER --- */
+        .bespoke { margin: var(--spacing-lg) 5vw; border-radius: 30px; background: var(--text-main); color: var(--bg-primary); padding: 8rem 4rem; text-align: center; position: relative; overflow: hidden; }
+        .bespoke>img { position: absolute; top: 0; left: 0; width: 100%; height: 120%; object-fit: cover; opacity: 0.2; z-index: 1; }
+        .bespoke h2 { font-size: 4rem; margin-bottom: 1.5rem; position: relative; z-index: 2; }
+        .bespoke p { font-size: 1.15rem; max-width: 600px; margin: 0 auto 3rem; color: #ccc; position: relative; z-index: 2; }
+        .bespoke .btn { background: var(--bg-primary); color: var(--text-main); position: relative; z-index: 2; }
+
+        /* --- 9. REVIEWS --- */
+        .reviews { padding: var(--spacing-xl) 0; }
+        .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+        .review-card { padding: 3rem; border: 1px solid var(--border); border-radius: 20px; }
+        .stars { color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem; }
+        .review-card p { font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-muted); }
+        .review-card h5 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
+
+        /* --- 10. JOURNAL --- */
+        .journal { padding: var(--spacing-lg) 0; border-top: 1px solid var(--border); }
+        .journal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .article-img { aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; margin-bottom: 1.5rem; background: var(--bg-secondary); position: relative; }
+        .article-img img { width: 100%; height: 120%; object-fit: cover; }
+        .article h3 { font-size: 2rem; margin: 0.5rem 0 1rem; }
+
+        /* --- 11. FOOTER --- */
+        footer { background: var(--text-main); color: var(--bg-primary); padding: 6rem 0 2rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .footer-logo { font-size: 2rem; font-family: var(--font-head); font-weight: 800; margin-bottom: 1rem; }
+        .footer-grid h4 { color: var(--accent); margin-bottom: 1.5rem; font-size: 1rem; font-family: var(--font-body); font-weight: 600; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid ul li { margin-bottom: 0.8rem; color: #aaa; font-size: 0.95rem; transition: color 0.3s; }
+        .footer-grid ul li:hover { color: var(--accent); }
+        .footer-bottom { font-size: 10vw; font-family: var(--font-head); font-weight: 800; text-align: center; line-height: 0.8; color: rgba(255, 255, 255, 0.05); margin-top: 4rem; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero { flex-direction: column; padding-top: 120px; text-align: center; }
+            .hero-content, .hero-img-wrapper { width: 100%; padding: 0; }
+            .hero-img-wrapper { height: 50vh; margin-top: 2rem; }
+            .hero p { margin: 0 auto 2.5rem; }
+            .bento-grid, .cat-grid, .review-grid { grid-template-columns: repeat(2, 1fr); }
+            .cat-item:nth-child(even) { margin-top: 0; }
+            .craft-wrap { flex-direction: column; }
+            .craft-img, .craft-text { width: 100%; }
+            .prod-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .bento-grid, .cat-grid, .review-grid, .journal-grid, .prod-grid, .footer-grid { grid-template-columns: 1fr; }
+            .stats { flex-direction: column; gap: 1.5rem; }
+            .cursor-dot, .cursor-circle { display: none; }
+            body, a, button, .menu-toggle { cursor: auto !important; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <nav>
+        <div class="logo font-head">BHAKTI<span class="text-accent">.</span></div>
+        <div class="nav-links">
+            <a href="/shop" data-nav="Shop">Shop</a>
+            <a href="/wholesale" data-nav="Wholesale">Wholesale</a>
+            <a href="/bespoke" data-nav="Bespoke">Bespoke</a>
+            <a href="/about" data-nav="About">About</a>
+            <a href="/contact" data-nav="Contact">Contact</a>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()" data-ga-action="mobile_menu_open">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="menu-close" onclick="toggleMenu()" data-ga-action="mobile_menu_close">✕</div>
+        <div class="mobile-link-wrapper"><a href="/" class="mobile-links" onclick="toggleMenu()" data-nav="Home Mobile">Home</a></div>
+        <div class="mobile-link-wrapper"><a href="/shop" class="mobile-links" onclick="toggleMenu()" data-nav="Shop Mobile">Shop</a></div>
+        <div class="mobile-link-wrapper"><a href="/wholesale" class="mobile-links" onclick="toggleMenu()" data-nav="Wholesale Mobile">Wholesale</a></div>
+        <div class="mobile-link-wrapper"><a href="/bespoke" class="mobile-links" onclick="toggleMenu()" data-nav="Bespoke Mobile">Bespoke</a></div>
+        <div class="mobile-link-wrapper"><a href="/about" class="mobile-links" onclick="toggleMenu()" data-nav="About Mobile">About</a></div>
+        <div class="mobile-link-wrapper"><a href="/contact" class="mobile-links" onclick="toggleMenu()" data-nav="Contact Mobile">Contact</a></div>
+    </div>
+
+    <section class="hero container">
+        <div class="hero-content gs-reveal">
+            <h1>We Curate <br><span class="text-accent">Atmosphere.</span></h1>
+            <p>Experience the finest paper artistry engineered for scale. Premium manufacturing designed exclusively for
+                large-quantity imports and global wholesale distribution.</p>
+            <a href="/wholesale" class="btn" data-ga-action="hero_cta_explore">Explore Wholesale</a>
+        </div>
+        <div class="hero-img-wrapper gs-reveal">
+            <picture>
+                <source srcset="../images/home/heroMobile.jpg" media="(max-width: 768px)">
+                <img src="./images/home/Inquire_banner.jpg" class="parallax-img"
+                    alt="Luxurious Bhakti Decor Paper Installations">
+            </picture>
+        </div>
+    </section>
+
+    <section class="intro container">
+        <p class="gs-reveal">
+            "Bhakti is devotion. When you choose us, you aren't just sourcing paper; you are importing a <span
+                class="text-accent">structural masterpiece</span> ready for seamless global distribution."
+        </p>
+        <div class="gs-reveal" style="margin-top: 3rem;">
+            <img src="./images/signature.png" alt="Founder Signature"
+                style="width: 150px; margin: 0 auto; display: inline-block;">
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="bento-grid">
+                <div class="bento-item gs-reveal"><span class="feature-num">01</span>
+                    <h3>Uncompromising Craftsmanship</h3>
+                </div>
+                <div class="bento-item gs-reveal"><span class="feature-num">02</span>
+                    <h3>Innovative Design</h3>
+                </div>
+                <div class="bento-item gs-reveal"><span class="feature-num">03</span>
+                    <h3>Extensive Variety</h3>
+                </div>
+                <div class="bento-item gs-reveal"><span class="feature-num">04</span>
+                    <h3>Bespoke Customization</h3>
+                </div>
+                <div class="bento-item gs-reveal"><span class="feature-num">05</span>
+                    <h3>Complimentary Samples</h3>
+                </div>
+                <div class="bento-item gs-reveal"><span class="feature-num">06</span>
+                    <h3>Unbeatable Wholesale Value</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories container">
+        <div class="section-header gs-reveal">
+            <span>Our Expertise</span>
+            <h2>The Collection</h2>
+        </div>
+        <div class="cat-grid">
+            <a href="/shop?category=Gift_Tissue_Wrap" class="cat-item gs-reveal hover-target track-category" data-cat="Gift Tissue Wrap">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772451585/pccjnaq1stdwcpokvgvc.jpg"
+                    class="parallax-img" alt="Gift Tissue Wrap">
+                <div class="cat-label">Gift Tissue Wrap</div>
+            </a>
+            <a href="/shop?category=Honeycomb_Balls" class="cat-item gs-reveal hover-target track-category" data-cat="Honeycomb Balls">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772201613/v9fuhyvu0bfwhjcxvwnq.png"
+                    class="parallax-img" alt="Honeycomb Balls">
+                <div class="cat-label">Honeycomb Balls</div>
+            </a>
+            <a href="/shop?category=Pinatas" class="cat-item gs-reveal hover-target track-category" data-cat="Pinatas">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772281252/hxkatfgji9y85rccw9si.jpg"
+                    class="parallax-img" alt="Pinatas">
+                <div class="cat-label">Pinatas</div>
+            </a>
+            <a href="/shop?category=Tissue_Tassels" class="cat-item gs-reveal hover-target track-category" data-cat="Tissue Tassels">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772285621/keybgsor7a1wf9f6hhlc.jpg"
+                    class="parallax-img" alt="Tissue Tassels">
+                <div class="cat-label">Tissue Tassels</div>
+            </a>
+            <a href="/shop?category=Pom_Pom_Balls" class="cat-item gs-reveal hover-target track-category" data-cat="Pom Pom Balls">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772888448/euuyscmusav1knwgnpwz.jpg"
+                    class="parallax-img" alt="Pom Pom Balls">
+                <div class="cat-label">Pom Pom Balls</div>
+            </a>
+            <a href="/shop?category=Paper_Fans" class="cat-item gs-reveal hover-target track-category" data-cat="Paper Fans">
+                <img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772346305/wbrrfrxkgydbrlixb02p.jpg"
+                    class="parallax-img" alt="Paper Fans">
+                <div class="cat-label">Paper Fans</div>
+            </a>
+        </div>
+    </section>
+
+    <section class="craft container">
+        <div class="craft-wrap">
+            <div class="craft-img gs-reveal">
+                <img src="./images/home/process.jpg" class="parallax-img" alt="Craftsmanship and Manufacturing Process">
+            </div>
+            <div class="craft-text gs-reveal">
+                <span class="text-accent font-head">The Process</span>
+                <h2>Engineered for Perfection</h2>
+                <p>We fuse industrial precision with the human touch. Sourced from sustainable forests and dyed with
+                    organic pigments, our materials are assembled by artisans with decades of lineage.</p>
+                <br>
+                <p>The result is a structurally sound product that holds its shape during long-haul transit, radiating
+                    color unlike anything else on the market—built strictly for high-volume importing.</p>
+
+                <div class="stats">
+                    <div class="stat">
+                        <h4>100%</h4><span>Eco-Friendly</span>
+                    </div>
+                    <div class="stat">
+                        <h4>18+</h4><span>GSM Quality</span>
+                    </div>
+                    <div class="stat">
+                        <h4>Global</h4><span>Export Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products container">
+        <div class="section-header gs-reveal" style="text-align: center;">
+            <span>Shop The Look</span>
+            <h2>Best Sellers</h2>
+        </div>
+        <div class="prod-grid">
+            <div class="prod-card gs-reveal">
+                <a href="/shop" class="hover-target track-product" data-product="Tissue Paper Pom Pom Decoration">
+                    <div class="img-box"><img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1773063209/epdv5f4jmutahypyao3t.jpg" class="parallax-img" alt="Tissue Paper Pom Pom Decoration ">
+                    </div>
+                    <h4>Tissue Paper Pom Pom Decoration </h4>
+                </a>
+            </div>
+            <div class="prod-card gs-reveal">
+                <a href="/shop" class="hover-target track-product" data-product="Christmas Paper Fan Decoration">
+                    <div class="img-box"><img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772346305/wbrrfrxkgydbrlixb02p.jpg" class="parallax-img" alt="Christmas Paper Fan Decoration">
+                    </div>
+                    <h4>Christmas Paper Fan Decoration</h4>
+                </a>
+            </div>
+            <div class="prod-card gs-reveal">
+                <a href="/shop" class="hover-target track-product" data-product="3d paper christmas tree decoration">
+                    <div class="img-box"><img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772278415/x7umlrucbccsrign8iyy.png" class="parallax-img"
+                            alt="3d paper christmas tree decoration"></div>
+                    <h4>3d paper christmas tree decoration</h4>
+                </a>
+            </div>
+            <div class="prod-card gs-reveal">
+                <a href="/shop" class="hover-target track-product" data-product="Pastel Honeycomb Bunny Decoration">
+                    <div class="img-box"><img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772196487/fhkkdnnakcvizonmauil.png" class="parallax-img" alt="Pastel Honeycomb Bunny Decoration">
+                    </div>
+                    <h4>Pastel Honeycomb Bunny Decoration</h4>
+                </a>
+            </div>
+            <div class="prod-card gs-reveal">
+                <a href="/shop" class="hover-target track-product" data-product="Cute Halloween Honeycomb Hanging Decoration Set">
+                    <div class="img-box"><img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772201960/fjiccbi7jkojarkygmso.jpg" class="parallax-img"
+                            alt="Cute Halloween Honeycomb Hanging Decoration Set"></div>
+                    <h4>Cute Halloween Honeycomb Hanging Decoration Set</h4>
+                </a>
+            </div>
+            <div class="prod-card gs-reveal">
+                <a href="/shop" class="hover-target track-product" data-product="Honeycomb Halloween Character Hanging Decorations">
+                    <div class="img-box"><img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772200944/rtvcrlwgn3lqpqanxccs.jpg" class="parallax-img"
+                            alt="Honeycomb Halloween Character Hanging Decorations"></div>
+                    <h4>Honeycomb Halloween Character Hanging Decorations</h4>
+                </a>
+            </div>
+            <div class="prod-card gs-reveal">
+                <a href="/shop" class="hover-target track-product" data-product="Unicorn Pinata Party Decoration with Stick">
+                    <div class="img-box"><img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772800075/qhmmv533ef3em9ohkswk.jpg" class="parallax-img"
+                            alt="Unicorn Pinata Party Decoration with Stick"></div>
+                    <h4>Unicorn Pinata Party Decoration with Stick</h4>
+                </a>
+            </div>
+            <div class="prod-card gs-reveal">
+                <a href="/shop" class="hover-target track-product" data-product="Flower Honeycomb Paper Hanging Decoration">
+                    <div class="img-box"><img src="https://res.cloudinary.com/dqnrbibhi/image/upload/v1772282183/mfvh0voy1anzcrhgf0uz.jpg" class="parallax-img"
+                            alt="Flower Honeycomb Paper Hanging Decoration "></div>
+                    <h4>Flower Honeycomb Paper Hanging Decoration </h4>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="bespoke gs-reveal">
+        <img src="./images/home/Inquire_banner.jpg" class="parallax-img" alt="Bespoke Paper Decor Logistics">
+        <h2>Bespoke Wholesale Operations</h2>
+        <p>Partnering with global distributors and event retailers. Custom colors, exclusive logo printing, and seamless
+            logistics tailored for large-quantity imports.</p>
+        <a href="/bespoke" class="btn hover-target" data-ga-action="bespoke_cta_click">Inquire for Distribution</a>
+    </section>
+
+    <section class="reviews container">
+        <div class="section-header gs-reveal">
+            <span>Voices</span>
+            <h2>Partner Stories</h2>
+        </div>
+        <div class="review-grid">
+            <div class="review-card gs-reveal">
+                <div class="stars">★★★★★</div>
+                <p>"We import from Bhakti Decor in large volumes, and the structural consistency across thousands of
+                    units is unmatched."</p>
+                <h5>— Global Events Supply Co.</h5>
+            </div>
+            <div class="review-card gs-reveal">
+                <div class="stars">★★★★★</div>
+                <p>"Absolutely stunning. The wholesale logistics process was incredibly smooth, ensuring our inventory
+                    arrived perfectly intact."</p>
+                <h5>— David & Sarah, Retailers NY</h5>
+            </div>
+            <div class="review-card gs-reveal">
+                <div class="stars">★★★★★</div>
+                <p>"Professional, prompt, and premium. A true manufacturing partner for our bulk corporate inventory
+                    needs."</p>
+                <h5>— Tech Solutions Pvt Ltd.</h5>
+            </div>
+        </div>
+    </section>
+
+    <section class="journal container">
+        <div class="section-header gs-reveal">
+            <span>The Journal</span>
+            <h2>Art of Living</h2>
+        </div>
+        <div class="journal-grid">
+            <article class="article gs-reveal">
+                <a href="/blog-details" class="hover-target track-blog" data-blog="Minimalist Wedding Paper Decor Trends">
+                    <div class="article-img"><img src="./images/home/blog_1.jpg" class="parallax-img"
+                            alt="Minimalist Wedding Paper Decor Trends"></div>
+                    <span class="text-accent font-head">Oct 12, 2025</span>
+                    <h3>How to style a minimalist wedding with paper</h3>
+                    <p>Discover the trend of 'Sustainable Luxury' and how top designers are switching from plastic to
+                        premium paper.</p>
+                </a>
+            </article>
+            <article class="article gs-reveal">
+                <a href="/blog-details" class="hover-target track-blog" data-blog="Psychology of color in celebrations">
+                    <div class="article-img"><img src="./images/home/blog_2.jpg" class="parallax-img"
+                            alt="Psychology of color in celebrations"></div>
+                    <span class="text-accent font-head">Sep 28, 2025</span>
+                    <h3>The Psychology of Color in Celebration</h3>
+                    <p>Why Deep Red and Gold evoke prosperity, and how to use them effectively in your wholesale
+                        inventory.</p>
+                </a>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">BHAKTI<span class="text-accent">.</span></div>
+                    <p style="color:#aaa; max-width: 300px;">Engineered to make your most important moments look as
+                        beautiful as they feel, at any scale.</p>
+                </div>
+                <div>
+                    <h4>Collections</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="/shop" class="hover-target">Honeycomb Balls</a></li>
+                        <li><a href="/shop" class="hover-target">Paper Stars</a></li>
+                        <li><a href="/shop" class="hover-target">Garlands</a></li>
+                        <li><a href="/shop" class="hover-target">Table Decor</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="/about" class="hover-target">Our Story</a></li>
+                        <li><a href="/wholesale" class="hover-target">Wholesale Orders</a></li>
+                        <li><a href="/bespoke" class="hover-target">Bespoke Manufacturing</a></li>
+                        <li><a href="/contact" class="hover-target">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Connect</h4>
+                    <ul class="footer-track-list">
+                        <li><a href="#" class="hover-target">Instagram</a></li>
+                        <li><a href="#" class="hover-target">LinkedIn</a></li>
+                        <li><a href="#" class="hover-target">Pinterest</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">BHAKTI DECOR</div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <script>
+        // Custom Cursor Logic
+        const dot = document.querySelector('.cursor-dot');
+        const circle = document.querySelector('.cursor-circle');
+
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
+            gsap.to(circle, { x: e.clientX, y: e.clientY, duration: 0.15 });
+        });
+
+        document.querySelectorAll('a, button, .menu-toggle, .hover-target, .menu-close').forEach(el => {
+            el.addEventListener('mouseenter', () => circle.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => circle.classList.remove('cursor-hover'));
+        });
+
+        // Smooth Scroll & Advanced GA4 Scroll Tracking
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        
+        let maxScrollMilestone = 0;
+        lenis.on('scroll', (e) => {
+            // Calculate scroll percentage
+            const scrollPercent = Math.round((e.animatedScroll / e.dimensions.maxScroll) * 100);
+            
+            // Check milestones (25, 50, 75, 100)
+            if (scrollPercent > 24 && maxScrollMilestone < 25) { triggerScrollEvent(25); }
+            else if (scrollPercent > 49 && maxScrollMilestone < 50) { triggerScrollEvent(50); }
+            else if (scrollPercent > 74 && maxScrollMilestone < 75) { triggerScrollEvent(75); }
+            else if (scrollPercent > 98 && maxScrollMilestone < 100) { triggerScrollEvent(100); }
+        });
+
+        function triggerScrollEvent(depth) {
+            maxScrollMilestone = depth;
+            if(typeof gtag === 'function') {
+                gtag('event', 'scroll_depth_reached', { 'depth_percentage': depth });
+            }
+        }
+
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.getElementById('mobileOverlay').classList.toggle('active');
+            document.body.style.overflow = document.body.style.overflow === 'hidden' ? 'auto' : 'hidden';
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Section Reveal Animations
+        document.querySelectorAll('.gs-reveal').forEach((elem) => {
+            gsap.fromTo(elem,
+                { autoAlpha: 0, y: 60 },
+                {
+                    duration: 1.2, autoAlpha: 1, y: 0, ease: "power4.out",
+                    scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none reverse" }
+                }
+            );
+        });
+
+        // Parallax Image Effect
+        document.querySelectorAll('.parallax-img').forEach((img) => {
+            gsap.fromTo(img,
+                { y: "-10%" },
+                {
+                    y: "10%", ease: "none",
+                    scrollTrigger: { trigger: img.parentElement, scrub: true }
+                }
+            );
+        });
+
+        // --- GA4 EVENT LISTENERS BINDING ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Navigation Clicks
+            document.querySelectorAll('nav .nav-links a, .mobile-overlay a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const destination = e.target.getAttribute('data-nav') || e.target.innerText;
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'navigation_click', { 'menu_item': destination });
+                    }
+                });
+            });
+
+            // 2. Explicit CTA Buttons
+            document.querySelectorAll('[data-ga-action]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const action = e.currentTarget.getAttribute('data-ga-action');
+                    if(typeof gtag === 'function') {
+                        gtag('event', action, { 'page_location': 'homepage' });
+                    }
+                });
+            });
+
+            // 3. Category Clicks (The Collection)
+            document.querySelectorAll('.track-category').forEach(cat => {
+                cat.addEventListener('click', (e) => {
+                    const categoryName = e.currentTarget.getAttribute('data-cat');
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'select_category', { 'category_name': categoryName });
+                    }
+                });
+            });
+
+            // 4. Product Clicks (Best Sellers)
+            document.querySelectorAll('.track-product').forEach(prod => {
+                prod.addEventListener('click', (e) => {
+                    const productName = e.currentTarget.getAttribute('data-product');
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'select_item', { 'item_list_name': 'Best Sellers Homepage', 'item_name': productName });
+                    }
+                });
+            });
+
+            // 5. Journal Clicks
+            document.querySelectorAll('.track-blog').forEach(blog => {
+                blog.addEventListener('click', (e) => {
+                    const blogName = e.currentTarget.getAttribute('data-blog');
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'read_journal', { 'article_title': blogName });
+                    }
+                });
+            });
+
+            // 6. Footer Links
+            document.querySelectorAll('.footer-track-list a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const linkName = e.target.innerText;
+                    if(typeof gtag === 'function') {
+                        gtag('event', 'footer_link_click', { 'link_text': linkName });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhakti Decor | Ultra-Premium Paper Decor Manufacturer</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -1167,4 +1865,4 @@
     </script>
 </body>
 
-</html>
+</html> -->
