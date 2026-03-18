@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhakti Decor | Sitemap Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #111;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #222;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #333;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #B89768;
+            margin-top: 0;
+        }
+
+        p {
+            color: #aaa;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background: #B89768;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #fff;
+        }
+
+        button:disabled {
+            background: #555;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Sitemap Generator</h1>
+        <p>This tool will connect to your live Firebase database, fetch every active product, and merge them with your
+            static pages to create a perfect Google-ready sitemap.</p>
+
+        <button id="generateBtn">Generate & Download sitemap.xml</button>
+        <div id="status"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // Your exact Firebase config
+        const firebaseConfig = {
+            apiKey: atob("QUl6YVN5QUoxU2VCZ05falNxMXgxUU9CQmVpcUR1SVpKcTliMDUw"),
+            authDomain: atob("Ymhha3RpLWRlY29yLmZpcmViYXNlYXBwLmNvbQ=="),
+            projectId: atob("Ymhha3RpLWRlY29y"),
+            messagingSenderId: atob("Mjg4MTU5NTA2ODgx"),
+            appId: atob("MToyODgxNTk1MDY4ODE6d2ViOjg4ZDY2NDA2YzA2NGFmOWNlZWNmNDA=")
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Your base domain
+        const BASE_URL = 'https://www.bhaktidecor.com';
+
+        // Your static pages
+        const staticPages = [
+            { url: '/', priority: '1.00', changefreq: 'weekly' },
+            { url: '/shop.html', priority: '0.90', changefreq: 'daily' },
+            { url: '/wholesale.html', priority: '0.85', changefreq: 'weekly' },
+            { url: '/bespoke.html', priority: '0.85', changefreq: 'monthly' },
+            { url: '/about.html', priority: '0.70', changefreq: 'monthly' },
+            { url: '/contact.html', priority: '0.70', changefreq: 'monthly' },
+            { url: '/journal.html', priority: '0.60', changefreq: 'weekly' },
+            { url: '/blog-details.html', priority: '0.50', changefreq: 'monthly' }
+        ];
+
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('generateBtn');
+            const status = document.getElementById('status');
+
+            btn.disabled = true;
+            btn.innerText = "Fetching Products...";
+            status.innerText = "";
+            status.style.color = "#aaa";
+
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+                xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+                // 1. Add Static Pages
+                staticPages.forEach(page => {
+                    xml += `  <url>\n`;
+                    xml += `    <loc>${BASE_URL}${page.url}</loc>\n`;
+                    xml += `    <lastmod>${today}</lastmod>\n`;
+                    xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
+                    xml += `    <priority>${page.priority}</priority>\n`;
+                    xml += `  </url>\n`;
+                });
+
+                // 2. Fetch & Add Dynamic Products from Firebase
+                const q = query(collection(db, "products"), where("isActive", "==", true));
+                const querySnapshot = await getDocs(q);
+
+                let productCount = 0;
+                querySnapshot.forEach((doc) => {
+                    productCount++;
+                    const productUrl = `${BASE_URL}/product.html?id=${doc.id}`;
+
+                    xml += `  <url>\n`;
+                    xml += `    <loc>${productUrl}</loc>\n`;
+                    xml += `    <lastmod>${today}</lastmod>\n`;
+                    xml += `    <changefreq>weekly</changefreq>\n`;
+                    xml += `    <priority>0.80</priority>\n`;
+                    xml += `  </url>\n`;
+                });
+
+                xml += `</urlset>`;
+
+                // 3. Create a downloadable file
+                const blob = new Blob([xml], { type: "application/xml" });
+                const downloadUrl = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+
+                a.href = downloadUrl;
+                a.download = "sitemap.xml";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                status.style.color = "#4CAF50";
+                status.innerText = `✅ Success! Downloaded sitemap with ${productCount} products.`;
+                btn.innerText = "Generate Again";
+                btn.disabled = false;
+
+            } catch (error) {
+                console.error(error);
+                status.style.color = "#f44336";
+                status.innerText = "❌ Error fetching data. Check console.";
+                btn.innerText = "Try Again";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>
