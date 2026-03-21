@@ -11,22 +11,21 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
-        // Configure basic settings & Page View
         gtag('config', 'G-J31VQKWW7S', {
             'send_page_view': true,
             'page_title': 'Shop Archive',
             'cookie_flags': 'SameSite=None;Secure'
         });
     </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
-        /* CORE VARIABLES */
+        /* ================= CORE VARIABLES ================= */
         :root {
             --bg-primary: #FFFFFF;
             --bg-secondary: #F4F4F4;
@@ -44,7 +43,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body, a, button, .menu-toggle, select { cursor: none !important; }
+        body, a, button, .menu-toggle, select, input { cursor: none !important; }
 
         body {
             background-color: var(--bg-primary);
@@ -60,10 +59,32 @@
         .container { max-width: 90vw; margin: 0 auto; }
         .text-accent { color: var(--accent); }
 
-        /* CUSTOM CURSOR */
+        /* ================= BUTTONS ================= */
+        .btn {
+            display: inline-block; padding: 0.8rem 2rem; background: var(--text-main);
+            color: var(--bg-primary); font-family: var(--font-head); text-transform: uppercase;
+            letter-spacing: 1.5px; font-size: 0.8rem; font-weight: 600; border-radius: 50px;
+            border: 1px solid var(--text-main); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .btn:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(184, 151, 104, 0.2); }
+        .btn.outline { background: transparent; color: var(--text-main); }
+        .btn.outline:hover { background: var(--bg-secondary); border-color: var(--text-main); color: var(--text-main); box-shadow: none; transform: none; }
+        .btn:disabled { opacity: 0.5; pointer-events: none; }
+
+        .floating-catalog-btn {
+            position: fixed; bottom: 40px; right: 40px; z-index: 990;
+            padding: 1.2rem 2rem; background: var(--text-main); color: var(--bg-primary);
+            font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1.5px;
+            font-size: 0.9rem; font-weight: 700; border-radius: 50px; border: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex; align-items: center; gap: 12px;
+        }
+        .floating-catalog-btn:hover { background: var(--accent); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(184, 151, 104, 0.4); }
+
+        /* ================= CUSTOM CURSOR ================= */
         .cursor-dot, .cursor-circle {
             position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-            pointer-events: none; z-index: 9999;
+            pointer-events: none; z-index: 99999;
         }
         .cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
         .cursor-circle {
@@ -72,7 +93,7 @@
         }
         .cursor-hover { width: 70px; height: 70px; background: rgba(184, 151, 104, 0.1); border-color: transparent; }
 
-        /* NAVIGATION */
+        /* ================= NAVIGATION ================= */
         nav {
             position: fixed; top: 0; width: 100%; padding: 1.5rem 5vw; display: flex;
             justify-content: space-between; align-items: center; z-index: 100;
@@ -90,7 +111,7 @@
         .menu-toggle { display: none; flex-direction: column; gap: 6px; z-index: 102; padding: 10px; }
         .bar { width: 30px; height: 2px; background-color: var(--text-main); transition: 0.3s; }
 
-        /* MOBILE MENU */
+        /* ================= MOBILE MENU ================= */
         .mobile-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: linear-gradient(135deg, var(--text-main) 0%, #1a1a1a 100%); z-index: 101;
@@ -116,19 +137,18 @@
         .mobile-overlay.active .mobile-links { transform: translateY(0); }
         .mobile-links:hover { color: var(--accent); }
 
-        /* HEADER */
+        /* ================= SHOP LAYOUT ================= */
         .shop-header { padding: 20vh 0 5vh 0; text-align: center; }
         .shop-header h1 { font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1; letter-spacing: -2px; margin-bottom: 1.5rem; }
         .shop-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1.1rem; font-weight: 400; }
 
-        /* STICKY FILTER BAR */
         .sticky-filter-bar {
             position: sticky; top: 75px; z-index: 90; background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px); padding: 1.5rem 0; border-bottom: 1px solid var(--border); margin-bottom: 3rem;
         }
-
-        /* DESKTOP FILTERS */
-        .filters-desktop { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; list-style: none; }
+        .filter-bar-inner { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        
+        .filters-desktop { display: flex; gap: 1rem; flex-wrap: wrap; list-style: none; justify-content: center; }
         .filter-link {
             background: var(--bg-secondary); border: 1px solid transparent; color: var(--text-muted);
             padding: 0.75rem 1.5rem; border-radius: 50px; text-transform: uppercase; font-size: 0.75rem;
@@ -137,16 +157,14 @@
         .filter-link:hover { color: var(--text-main); border-color: var(--border); }
         .filter-link.active { background: var(--text-main); color: var(--bg-primary); }
 
-        /* MOBILE FILTERS */
-        .filters-mobile { display: none; text-align: center; }
+        .filters-mobile { display: none; }
         .mobile-select {
-            padding: 1rem; width: 80%; max-width: 300px; font-family: var(--font-body); font-weight: 500;
-            text-transform: uppercase; font-size: 0.85rem; border: 1px solid var(--border); border-radius: 8px;
+            padding: 0.8rem; width: 200px; font-family: var(--font-body); font-weight: 500;
+            text-transform: uppercase; font-size: 0.75rem; border: 1px solid var(--border); border-radius: 50px;
             background: var(--bg-primary); outline: none; transition: border-color 0.3s;
         }
         .mobile-select:focus { border-color: var(--accent); }
 
-        /* SHOP GRID */
         .shop-grid { padding: 0 0 15vh 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4rem 2rem; min-height: 40vh; }
         .product-card { background: transparent; position: relative; opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
         .product-card-link { display: block; text-decoration: none; color: inherit; }
@@ -164,10 +182,92 @@
         .product-cat { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem; font-weight: 600; }
         .product-title { font-size: 1.15rem; color: var(--text-main); font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        /* FOOTER */
-        footer { padding: 4rem 0; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-light); }
+        /* ================= MODAL STYLES ================= */
+        .catalog-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
+            z-index: 1000; display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .catalog-modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .catalog-modal {
+            background: var(--bg-primary); width: 90%; max-width: 1000px; height: 85vh;
+            border-radius: 24px; overflow: hidden; display: flex; flex-direction: column;
+            transform: translateY(30px); transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15); position: relative; pointer-events: auto;
+        }
+        .catalog-modal-overlay.active .catalog-modal { transform: translateY(0); }
+        
+        .modal-header {
+            padding: 2rem 3rem; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h2 { font-size: 1.8rem; margin: 0; }
+        .close-modal { font-size: 2.5rem; line-height: 1; color: var(--text-light); transition: 0.3s; background: transparent; border: none; padding: 0; }
+        .close-modal:hover { color: var(--accent); transform: rotate(90deg); }
 
-        /* RESPONSIVE */
+        /* Modal Body setup to allow natural scrolling without Lenis interference */
+        .modal-body { 
+            flex: 1; overflow-y: auto; padding: 2rem 3rem; position: relative; 
+            overscroll-behavior: contain;
+        }
+        
+        .modal-step { display: none; animation: fadeIn 0.4s ease forwards; }
+        .modal-step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .modal-controls { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .modal-input, .modal-select {
+            padding: 0.8rem 1.5rem; border: 1px solid var(--border); border-radius: 50px;
+            font-family: var(--font-body); font-size: 0.9rem; outline: none; background: var(--bg-secondary);
+        }
+        .modal-input { flex: 1; min-width: 200px; }
+        .modal-input:focus, .modal-select:focus { border-color: var(--accent); background: var(--bg-primary); }
+
+        .modal-product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
+        .selectable-card {
+            border: 2px solid transparent; border-radius: 16px; padding: 10px; transition: 0.3s;
+            position: relative; text-align: center;
+        }
+        .selectable-card:hover { background: var(--bg-secondary); }
+        .selectable-card.selected { border-color: var(--accent); background: rgba(184, 151, 104, 0.05); }
+        .selectable-card.selected::after {
+            content: '✓'; position: absolute; top: 15px; right: 15px; width: 24px; height: 24px;
+            background: var(--accent); color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 12px; font-weight: bold;
+        }
+        .selectable-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; }
+        .selectable-card h4 { font-size: 0.9rem; font-family: var(--font-body); font-weight: 600; line-height: 1.3; }
+        .selectable-card p { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; margin-top: 0.3rem; letter-spacing: 1px; }
+
+        .review-list { display: flex; flex-direction: column; gap: 1rem; }
+        .review-item {
+            display: flex; align-items: center; gap: 1.5rem; padding: 1rem;
+            border: 1px solid var(--border); border-radius: 16px;
+        }
+        .review-item img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+        .review-item-details { flex: 1; }
+        .review-item-details h4 { font-size: 1rem; margin-bottom: 0.2rem; }
+        .review-item-details p { font-size: 0.75rem; color: var(--text-muted); }
+        .remove-btn { color: #d9534f; background: transparent; border: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .remove-btn:hover { color: #c9302c; text-decoration: underline; }
+
+        .form-group { margin-bottom: 2rem; max-width: 400px; }
+        .form-group label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.8rem; font-weight: 600; }
+        .form-control {
+            width: 100%; background: transparent; border: none; border-bottom: 2px solid var(--border);
+            padding: 1rem 0; color: var(--text-main); font-family: var(--font-head);
+            font-size: 1.5rem; transition: border-color 0.4s ease; outline: none;
+        }
+        .form-control:focus { border-color: var(--accent); }
+
+        .modal-footer {
+            padding: 1.5rem 3rem; border-top: 1px solid var(--border); background: var(--bg-secondary);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        /* ================= RESPONSIVE ================= */
         @media (max-width: 1200px) { .shop-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 900px) { .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem 1.5rem; } }
         @media (max-width: 768px) {
@@ -175,13 +275,17 @@
             .menu-toggle { display: flex; }
             .filters-desktop { display: none; }
             .filters-mobile { display: block; }
+            .filter-bar-inner { flex-direction: column; }
             .cursor-dot, .cursor-circle { display: none; }
-            body, a, button, .menu-toggle, select { cursor: auto !important; }
+            body, a, button, .menu-toggle, select, input { cursor: auto !important; }
+            .modal-header, .modal-body, .modal-footer { padding: 1.5rem; }
+            .floating-catalog-btn { bottom: 20px; right: 20px; padding: 1rem 1.5rem; font-size: 0.8rem; }
         }
         @media (max-width: 600px) {
             .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem 1rem; }
             .product-img-wrapper { border-radius: 12px; }
             .product-title { font-size: 1rem; }
+            .modal-product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         }
     </style>
 </head>
@@ -224,16 +328,16 @@
     </header>
 
     <div class="sticky-filter-bar gs-reveal">
-        <div class="container">
-            <ul class="filters-desktop" id="filterContainer">
-                <li><button class="filter-link active">Loading...</button></li>
-            </ul>
-
+        <div class="container filter-bar-inner">
             <div class="filters-mobile">
-                <select class="mobile-select" id="mobileSelectContainer" onchange="window.filterProducts(this.value, null)">
+                <select class="mobile-select hover-target" id="mobileSelectContainer" onchange="window.filterProducts(this.value, null)">
                     <option value="View All">View All</option>
                 </select>
             </div>
+            
+            <ul class="filters-desktop" id="filterContainer">
+                <li><button class="filter-link active">Loading...</button></li>
+            </ul>
         </div>
     </div>
 
@@ -249,6 +353,56 @@
         </div>
     </footer>
 
+    <button class="floating-catalog-btn hover-target" id="openCatalogBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        Build Catalog
+    </button>
+
+    <div class="catalog-modal-overlay" id="catalogModal">
+        <div class="catalog-modal">
+            <div class="modal-header">
+                <h2 class="font-head" id="modalTitle">Select Products</h2>
+                <button class="close-modal hover-target" id="closeModalBtn">&times;</button>
+            </div>
+            
+            <div class="modal-body" data-lenis-prevent="true">
+                <div class="modal-step active" id="step1">
+                    <div class="modal-controls">
+                        <input type="text" id="catalogSearch" class="modal-input hover-target" placeholder="Search products...">
+                        <select id="catalogCategoryFilter" class="modal-select hover-target">
+                            <option value="All">All Categories</option>
+                        </select>
+                    </div>
+                    <div class="modal-product-grid" id="modalGrid"></div>
+                </div>
+
+                <div class="modal-step" id="step2">
+                    <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Review your selections before generating the catalog.</p>
+                    <div class="review-list" id="reviewList"></div>
+                </div>
+
+                <div class="modal-step" id="step3">
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <label>Prepared For (Client Name)</label>
+                        <input type="text" id="clientName" class="form-control hover-target" placeholder="e.g. John Doe" required>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Your custom premium PDF is ready to be generated with the selected products.</p>
+                </div>
+            </div>
+
+            <div class="modal-footer" id="modalFooter">
+                <span id="selectedCount" style="font-weight: 600; font-size: 0.9rem;">0 Items Selected</span>
+                <button class="btn hover-target" id="btnNext1" disabled>Review Selection</button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -257,7 +411,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // Firebase Config
         const firebaseConfig = {
             apiKey: atob("QUl6YVN5QUoxU2VCZ05falNxMXgxUU9CQmVpcUR1SVpKcTliMDUw"),
             authDomain: atob("Ymhha3RpLWRlY29yLmZpcmViYXNlYXBwLmNvbQ=="),
@@ -268,28 +421,45 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        
         let allProducts = [];
+        let uniqueCategoriesList = [];
+        let selectedCatalogItems = new Set();
+        let currentModalStep = 1;
 
-        // Custom Cursor Logic
-        const dot = document.querySelector('.cursor-dot');
-        const circle = document.querySelector('.cursor-circle');
+        // Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
 
+        // ===============================================
+        // NEW EVENT DELEGATION FOR CUSTOM CURSOR (BUG FIX)
+        // ===============================================
         if(window.innerWidth > 768) {
+            const dot = document.querySelector('.cursor-dot');
+            const circle = document.querySelector('.cursor-circle');
+
             window.addEventListener('mousemove', (e) => {
                 gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
                 gsap.to(circle, { x: e.clientX, y: e.clientY, duration: 0.15 });
             });
+
+            // Uses event delegation instead of breaking elements with cloneNode
+            document.addEventListener('mouseover', (e) => {
+                if(e.target.closest('a, button, .menu-toggle, .filter-link, select, input, .selectable-card, .hover-target')) {
+                    circle.classList.add('cursor-hover');
+                }
+            });
+            document.addEventListener('mouseout', (e) => {
+                if(e.target.closest('a, button, .menu-toggle, .filter-link, select, input, .selectable-card, .hover-target')) {
+                    circle.classList.remove('cursor-hover');
+                }
+            });
         }
 
-        function attachCursorHover() {
-            if(window.innerWidth > 768) {
-                document.querySelectorAll('a, button, .menu-toggle, .filter-link, select, .menu-close').forEach(el => {
-                    el.addEventListener('mouseenter', () => circle.classList.add('cursor-hover'));
-                    el.addEventListener('mouseleave', () => circle.classList.remove('cursor-hover'));
-                });
-            }
-        }
-
+        // ===============================================
+        // FIREBASE FETCHING
+        // ===============================================
         async function loadProducts() {
             try {
                 const q = query(collection(db, "products"), where("isActive", "==", true));
@@ -306,8 +476,16 @@
                     });
                 });
 
-                renderFilters(Array.from(uniqueCategories));
+                uniqueCategoriesList = Array.from(uniqueCategories).sort();
+                
+                // Render Page Main Grid
+                renderFilters(uniqueCategoriesList);
                 renderProducts(allProducts);
+                
+                // Render Modal Data
+                populateModalCategories();
+                renderModalGrid(allProducts);
+
             } catch (error) {
                 console.error(error);
                 document.getElementById('shopGrid').innerHTML = "<p style='text-align:center; grid-column: 1/-1; color: #D32F2F;'>Failed to synchronize inventory.</p>";
@@ -321,11 +499,10 @@
             deskContainer.innerHTML = `<li><button class="filter-link active" onclick="window.filterProducts('View All', this)">View All</button></li>`;
             mobContainer.innerHTML = `<option value="View All">View All</option>`;
 
-            categories.sort().forEach(category => {
+            categories.forEach(category => {
                 deskContainer.innerHTML += `<li><button class="filter-link" onclick="window.filterProducts('${category}', this)">${category}</button></li>`;
                 mobContainer.innerHTML += `<option value="${category}">${category}</option>`;
             });
-            attachCursorHover();
         }
 
         function renderProducts(productList) {
@@ -336,8 +513,6 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.style.transitionDelay = `${(index % 12) * 0.08}s`;
-
-                // Note: The 'track-product' class and data attribute enable GA4 to track exactly which item is clicked
                 card.innerHTML = `
                 <a href="product.html?id=${product.id}" class="product-card-link track-product" data-product="${product.title}">
                     <div class="product-img-wrapper">
@@ -350,7 +525,6 @@
                 </a>
                 `;
                 grid.appendChild(card);
-
                 requestAnimationFrame(() => {
                     setTimeout(() => {
                         card.style.opacity = '1';
@@ -358,21 +532,15 @@
                     }, 50);
                 });
             });
-            attachCursorHover();
         }
 
         window.filterProducts = function (category, btnElement) {
-            // GA4 Tracking: Filter usage
-            if(typeof gtag === 'function') {
-                gtag('event', 'select_item_list', { 'item_list_name': category });
-            }
-
             if (btnElement) {
-                document.querySelectorAll('.filter-link').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.sticky-filter-bar .filter-link').forEach(btn => btn.classList.remove('active'));
                 btnElement.classList.add('active');
                 document.getElementById('mobileSelectContainer').value = category;
             } else {
-                document.querySelectorAll('.filter-link').forEach(btn => {
+                document.querySelectorAll('.sticky-filter-bar .filter-link').forEach(btn => {
                     if (btn.innerText === category) btn.classList.add('active');
                     else btn.classList.remove('active');
                 });
@@ -380,790 +548,319 @@
 
             if (category === 'View All') renderProducts(allProducts);
             else renderProducts(allProducts.filter(p => p.categories.includes(category)));
-
             window.scrollTo({ top: document.querySelector('.sticky-filter-bar').offsetTop - 20, behavior: 'smooth' });
         };
 
-        window.toggleMenu = function () {
-            document.getElementById('mobileOverlay').classList.toggle('active');
-            document.body.style.overflow = document.body.style.overflow === 'hidden' ? 'auto' : 'hidden';
-        };
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadProducts();
-        });
-
-        // GSAP Header Reveal
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.fromTo('.gs-reveal', { autoAlpha: 0, y: 40 }, { duration: 1.2, autoAlpha: 1, y: 0, ease: "power4.out", delay: 0.2 });
-
-        // Lenis Smooth Scroll
-        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        // ===============================================
+        // CATALOG MODAL LOGIC (COMPLETELY FIXED)
+        // ===============================================
+        const modalOverlay = document.getElementById('catalogModal');
         
-        // --- ADVANCED GA4 SCROLL TRACKING ---
-        let maxScrollMilestone = 0;
-        lenis.on('scroll', (e) => {
-            // Guard against division by zero on very short pages
-            if(e.dimensions.maxScroll === 0) return; 
-            
-            const scrollPercent = Math.round((e.animatedScroll / e.dimensions.maxScroll) * 100);
-            
-            if (scrollPercent > 24 && maxScrollMilestone < 25) { triggerScrollEvent(25); }
-            else if (scrollPercent > 49 && maxScrollMilestone < 50) { triggerScrollEvent(50); }
-            else if (scrollPercent > 74 && maxScrollMilestone < 75) { triggerScrollEvent(75); }
-            else if (scrollPercent > 98 && maxScrollMilestone < 100) { triggerScrollEvent(100); }
+        document.getElementById('openCatalogBtn').addEventListener('click', () => {
+            modalOverlay.classList.add('active');
+            // Disable background scroll gracefully without breaking the modal
+            document.body.style.overflow = 'hidden'; 
+            goToStep(1);
         });
 
-        function triggerScrollEvent(depth) {
-            maxScrollMilestone = depth;
-            if(typeof gtag === 'function') {
-                gtag('event', 'scroll_depth_reached', { 'depth_percentage': depth });
-            }
-        }
-
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-        requestAnimationFrame(raf);
-
-        // --- GA4 EVENT DELEGATION TRACKING ---
-        document.addEventListener('click', (e) => {
-            // 1. Navigation Clicks
-            if(e.target.closest('nav .nav-links a') || e.target.closest('.mobile-overlay a')) {
-                const link = e.target.closest('a');
-                if(typeof gtag === 'function') {
-                    gtag('event', 'navigation_click', { 'menu_item': link.innerText });
-                }
-            }
-
-            // 2. Product Selection (Works on dynamically injected elements)
-            const productLink = e.target.closest('.track-product');
-            if(productLink) {
-                const productName = productLink.getAttribute('data-product');
-                if(typeof gtag === 'function') {
-                    gtag('event', 'select_item', { 
-                        'item_list_name': 'Shop Catalogue', 
-                        'item_name': productName 
-                    });
-                }
-            }
-        });
-    </script>
-</body>
-
-</html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wholesale Collection | Premium Paper Decor | Bhakti Decor</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <style>
-        /* CORE VARIABLES */
-        :root {
-            --bg-primary: #FFFFFF;
-            --bg-secondary: #F4F4F4;
-            --text-main: #111111;
-            --text-muted: #666666;
-            --text-light: #999999;
-            --accent: #B89768;
-            --border: rgba(0, 0, 0, 0.08);
-            --font-head: 'Syne', sans-serif;
-            --font-body: 'Montserrat', sans-serif;
-        }
-
-        html.lenis {
-            height: auto;
-        }
-
-        .lenis.lenis-smooth {
-            scroll-behavior: auto;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body,
-        a,
-        button,
-        .menu-toggle,
-        select {
-            cursor: none !important;
-        }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        .font-head {
-            font-family: var(--font-head);
-            font-weight: 700;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-        }
-
-        .container {
-            max-width: 90vw;
-            margin: 0 auto;
-        }
-
-        .text-accent {
-            color: var(--accent);
-        }
-
-        /* CUSTOM CURSOR */
-        .cursor-dot,
-        .cursor-circle {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        .cursor-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-
-        .cursor-circle {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(184, 151, 104, 0.5);
-            border-radius: 50%;
-            transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
-        }
-
-        .cursor-hover {
-            width: 70px;
-            height: 70px;
-            background: rgba(184, 151, 104, 0.1);
-            border-color: transparent;
-        }
-
-        /* NAVIGATION */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            font-family: var(--font-head);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-        }
-
-        .nav-links a {
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            position: relative;
-            padding-bottom: 4px;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .nav-links a.active {
-            color: var(--accent);
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            z-index: 102;
-            padding: 10px;
-        }
-
-        .bar {
-            width: 30px;
-            height: 2px;
-            background-color: var(--text-main);
-            transition: 0.3s;
-        }
-
-        /* MOBILE MENU */
-        .mobile-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, var(--text-main) 0%, #1a1a1a 100%);
-            z-index: 101;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            transform: translateY(-100%);
-            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .mobile-overlay::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(var(--accent) 1.5px, transparent 1.5px);
-            background-size: 35px 35px;
-            opacity: 0.07;
-            pointer-events: none;
-        }
-
-        .mobile-overlay.active {
-            transform: translateY(0);
-        }
-
-        .menu-close {
-            position: absolute;
-            top: 2rem;
-            right: 5vw;
-            font-size: 2.5rem;
-            color: var(--bg-primary);
-            font-family: var(--font-body);
-            font-weight: 300;
-            transition: transform 0.4s ease, color 0.3s;
-        }
-
-        .menu-close:hover {
-            transform: rotate(90deg);
-            color: var(--accent);
-        }
-
-        .mobile-link-wrapper {
-            overflow: hidden;
-            position: relative;
-            z-index: 2;
-        }
-
-        .mobile-links {
-            font-family: var(--font-head);
-            font-size: 3rem;
-            color: var(--bg-primary);
-            display: block;
-            transform: translateY(100%);
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .mobile-overlay.active .mobile-links {
-            transform: translateY(0);
-        }
-
-        .mobile-links:hover {
-            color: var(--accent);
-        }
-
-        /* HEADER */
-        .shop-header {
-            padding: 20vh 0 5vh 0;
-            text-align: center;
-        }
-
-        .shop-header h1 {
-            font-size: clamp(3rem, 6vw, 5.5rem);
-            line-height: 1;
-            letter-spacing: -2px;
-            margin-bottom: 1.5rem;
-        }
-
-        .shop-header p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            font-weight: 400;
-        }
-
-        /* STICKY FILTER BAR */
-        .sticky-filter-bar {
-            position: sticky;
-            top: 75px;
-            /* Adjusts just below the navbar */
-            z-index: 90;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 3rem;
-        }
-
-        /* DESKTOP FILTERS */
-        .filters-desktop {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            list-style: none;
-        }
-
-        .filter-link {
-            background: var(--bg-secondary);
-            border: 1px solid transparent;
-            color: var(--text-muted);
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: all 0.4s;
-        }
-
-        .filter-link:hover {
-            color: var(--text-main);
-            border-color: var(--border);
-        }
-
-        .filter-link.active {
-            background: var(--text-main);
-            color: var(--bg-primary);
-        }
-
-        /* MOBILE FILTERS */
-        .filters-mobile {
-            display: none;
-            text-align: center;
-        }
-
-        .mobile-select {
-            padding: 1rem;
-            width: 80%;
-            max-width: 300px;
-            font-family: var(--font-body);
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg-primary);
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .mobile-select:focus {
-            border-color: var(--accent);
-        }
-
-        /* SHOP GRID */
-        .shop-grid {
-            padding: 0 0 15vh 0;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 4rem 2rem;
-            min-height: 40vh;
-        }
-
-        .product-card {
-            background: transparent;
-            position: relative;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-        }
-
-        .product-card-link {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* SQUARE PRODUCT CONTAINERS */
-        .product-img-wrapper {
-            position: relative;
-            aspect-ratio: 1 / 1;
-            width: 100%;
-            height: auto;
-            overflow: hidden;
-            background: var(--bg-secondary);
-            margin-bottom: 1.5rem;
-            border-radius: 20px;
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .product-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .product-card-link:hover .product-img-wrapper {
-            transform: translateY(-10px);
-        }
-
-        .product-card-link:hover .product-img-wrapper img {
-            transform: scale(1.08);
-        }
-
-        .product-details {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .product-cat {
-            font-size: 0.75rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .product-title {
-            font-size: 1.15rem;
-            color: var(--text-main);
-            font-weight: 500;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* FOOTER */
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1200px) {
-            .shop-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 900px) {
-            .shop-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 3rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .filters-desktop {
-                display: none;
-            }
-
-            .filters-mobile {
-                display: block;
-            }
-
-            .cursor-dot,
-            .cursor-circle {
-                display: none;
-            }
-
-            body,
-            a,
-            button,
-            .menu-toggle,
-            select {
-                cursor: auto !important;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .shop-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem 1rem;
-            }
-
-            .product-img-wrapper {
-                border-radius: 12px;
-            }
-
-            .product-title {
-                font-size: 1rem;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="cursor-dot"></div>
-    <div class="cursor-circle"></div>
-
-    <nav aria-label="Main Navigation">
-        <a href="/" class="logo">BHAKTI<span class="text-accent">.</span></a>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/shop.html" class="active">Shop</a>
-            <a href="/wholesale">Wholesale</a>
-            <a href="/bespoke">Bespoke</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-        </div>
-        <div class="menu-toggle" onclick="window.toggleMenu()" aria-label="Toggle Menu">
-            <span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
-        </div>
-    </nav>
-
-    <div class="mobile-overlay" id="mobileOverlay">
-        <div class="menu-close" onclick="window.toggleMenu()">✕</div>
-        <div class="mobile-link-wrapper"><a href="/" class="mobile-links" onclick="window.toggleMenu()">Home</a></div>
-        <div class="mobile-link-wrapper"><a href="/shop.html" class="mobile-links"
-                onclick="window.toggleMenu()">Shop</a></div>
-        <div class="mobile-link-wrapper"><a href="/wholesale" class="mobile-links"
-                onclick="window.toggleMenu()">Wholesale</a></div>
-        <div class="mobile-link-wrapper"><a href="/bespoke" class="mobile-links"
-                onclick="window.toggleMenu()">Bespoke</a></div>
-        <div class="mobile-link-wrapper"><a href="/about" class="mobile-links" onclick="window.toggleMenu()">About</a>
-        </div>
-        <div class="mobile-link-wrapper"><a href="/contact" class="mobile-links"
-                onclick="window.toggleMenu()">Contact</a></div>
-    </div>
-
-    <header class="shop-header">
-        <div class="container gs-reveal">
-            <h1>Wholesale Catalog</h1>
-            <p>Select inventory available for immediate bulk dispatch.</p>
-        </div>
-    </header>
-
-    <div class="sticky-filter-bar gs-reveal">
-        <div class="container">
-            <ul class="filters-desktop" id="filterContainer">
-                <li><button class="filter-link active">Loading...</button></li>
-            </ul>
-
-            <div class="filters-mobile">
-                <select class="mobile-select" id="mobileSelectContainer"
-                    onchange="window.filterProducts(this.value, null)">
-                    <option value="View All">View All</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <section class="container">
-        <div class="shop-grid" id="shopGrid">
-            <p style='text-align:center; grid-column: 1/-1; color: var(--text-light); font-size: 1.1rem;'>Synchronizing
-                with current inventory...</p>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Bhakti Decor. Engineered for Scale.</p>
-        </div>
-    </footer>
-
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-        // Firebase Config
-        const firebaseConfig = {
-            apiKey: atob("QUl6YVN5QUoxU2VCZ05falNxMXgxUU9CQmVpcUR1SVpKcTliMDUw"),
-            authDomain: atob("Ymhha3RpLWRlY29yLmZpcmViYXNlYXBwLmNvbQ=="),
-            projectId: atob("Ymhha3RpLWRlY29y"),
-            messagingSenderId: atob("Mjg4MTU5NTA2ODgx"),
-            appId: atob("MToyODgxNTk1MDY4ODE6d2ViOjg4ZDY2NDA2YzA2NGFmOWNlZWNmNDA=")
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        let allProducts = [];
-
-        // Custom Cursor Logic
-        const dot = document.querySelector('.cursor-dot');
-        const circle = document.querySelector('.cursor-circle');
-
-        window.addEventListener('mousemove', (e) => {
-            gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
-            gsap.to(circle, { x: e.clientX, y: e.clientY, duration: 0.15 });
+        document.getElementById('closeModalBtn').addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = ''; 
         });
 
-        // Apply cursor hover effect dynamically
-        function attachCursorHover() {
-            document.querySelectorAll('a, button, .menu-toggle, .filter-link, select, .menu-close').forEach(el => {
-                el.addEventListener('mouseenter', () => circle.classList.add('cursor-hover'));
-                el.addEventListener('mouseleave', () => circle.classList.remove('cursor-hover'));
+        function populateModalCategories() {
+            const select = document.getElementById('catalogCategoryFilter');
+            select.innerHTML = '<option value="All">All Categories</option>';
+            uniqueCategoriesList.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat; option.textContent = cat;
+                select.appendChild(option);
             });
         }
 
-        async function loadProducts() {
-            try {
-                const q = query(collection(db, "products"), where("isActive", "==", true));
-                const querySnapshot = await getDocs(q);
-                const uniqueCategories = new Set();
-
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const itemCats = data.categories || (data.category ? [data.category] : ['Uncategorized']);
-                    itemCats.forEach(c => uniqueCategories.add(c));
-                    allProducts.push({
-                        id: doc.id, title: data.name, categories: itemCats, primaryCat: itemCats[0],
-                        img: data.images && data.images.length > 0 ? data.images[0] : 'https://images.unsplash.com/photo-1618331835717-801e976710b2?w=800&q=80'
-                    });
-                });
-
-                renderFilters(Array.from(uniqueCategories));
-                renderProducts(allProducts);
-            } catch (error) {
-                console.error(error);
-                document.getElementById('shopGrid').innerHTML = "<p style='text-align:center; grid-column: 1/-1; color: #D32F2F;'>Failed to synchronize inventory.</p>";
-            }
-        }
-
-        function renderFilters(categories) {
-            const deskContainer = document.getElementById('filterContainer');
-            const mobContainer = document.getElementById('mobileSelectContainer');
-
-            deskContainer.innerHTML = `<li><button class="filter-link active" onclick="window.filterProducts('View All', this)">View All</button></li>`;
-            mobContainer.innerHTML = `<option value="View All">View All</option>`;
-
-            categories.sort().forEach(category => {
-                deskContainer.innerHTML += `<li><button class="filter-link" onclick="window.filterProducts('${category}', this)">${category}</button></li>`;
-                mobContainer.innerHTML += `<option value="${category}">${category}</option>`;
-            });
-            attachCursorHover();
-        }
-
-        function renderProducts(productList) {
-            const grid = document.getElementById('shopGrid');
+        function renderModalGrid(products) {
+            const grid = document.getElementById('modalGrid');
             grid.innerHTML = '';
-
-            productList.forEach((product, index) => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.style.transitionDelay = `${(index % 12) * 0.08}s`;
-
-                card.innerHTML = `
-                <a href="product.html?id=${product.id}" class="product-card-link">
-                    <div class="product-img-wrapper">
-                        <img src="${product.img}" alt="${product.title}" loading="lazy">
-                    </div>
-                    <div class="product-details">
-                        <span class="product-cat">${product.primaryCat}</span>
-                        <h3 class="product-title">${product.title}</h3>
-                    </div>
-                </a>
-                `;
-                grid.appendChild(card);
-
-                requestAnimationFrame(() => {
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 50);
-                });
-            });
-            attachCursorHover();
-        }
-
-        window.filterProducts = function (category, btnElement) {
-            if (btnElement) {
-                document.querySelectorAll('.filter-link').forEach(btn => btn.classList.remove('active'));
-                btnElement.classList.add('active');
-                document.getElementById('mobileSelectContainer').value = category;
-            } else {
-                document.querySelectorAll('.filter-link').forEach(btn => {
-                    if (btn.innerText === category) btn.classList.add('active');
-                    else btn.classList.remove('active');
-                });
+            
+            if(products.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding: 2rem;">No products found.</p>`;
+                return;
             }
 
-            if (category === 'View All') renderProducts(allProducts);
-            else renderProducts(allProducts.filter(p => p.categories.includes(category)));
+            products.forEach(p => {
+                const isSelected = selectedCatalogItems.has(p.id);
+                const card = document.createElement('div');
+                card.className = `selectable-card hover-target ${isSelected ? 'selected' : ''}`;
+                card.dataset.id = p.id;
+                card.innerHTML = `
+                    <img src="${p.img}" alt="${p.title}" loading="lazy">
+                    <h4>${p.title}</h4>
+                    <p>${p.primaryCat}</p>
+                `;
+                
+                // Directly attach event listener
+                card.addEventListener('click', function() {
+                    if(selectedCatalogItems.has(p.id)) {
+                        selectedCatalogItems.delete(p.id);
+                        this.classList.remove('selected');
+                    } else {
+                        selectedCatalogItems.add(p.id);
+                        this.classList.add('selected');
+                    }
+                    updateSelectionCount();
+                });
+                
+                grid.appendChild(card);
+            });
+        }
 
-            // Scroll to top of grid when filtering so user sees results immediately
-            window.scrollTo({ top: document.querySelector('.sticky-filter-bar').offsetTop - 20, behavior: 'smooth' });
+        // Live Search & Category Filtering inside Modal
+        function applyModalFilters() {
+            const search = document.getElementById('catalogSearch').value.toLowerCase();
+            const cat = document.getElementById('catalogCategoryFilter').value;
+            
+            let filtered = allProducts.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(search);
+                const matchesCat = cat === 'All' || p.categories.includes(cat);
+                return matchesSearch && matchesCat;
+            });
+            renderModalGrid(filtered);
+        }
+
+        document.getElementById('catalogSearch').addEventListener('input', applyModalFilters);
+        document.getElementById('catalogCategoryFilter').addEventListener('change', applyModalFilters);
+
+        function updateSelectionCount() {
+            const countStr = `${selectedCatalogItems.size} Items Selected`;
+            const countEl = document.getElementById('selectedCount');
+            const btnNext1 = document.getElementById('btnNext1');
+            
+            if(countEl) countEl.innerText = countStr;
+            if(btnNext1) btnNext1.disabled = selectedCatalogItems.size === 0;
+        }
+
+        function goToStep(stepNumber) {
+            currentModalStep = stepNumber;
+            document.querySelectorAll('.modal-step').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step${stepNumber}`).classList.add('active');
+            
+            const titleEl = document.getElementById('modalTitle');
+            const footerEl = document.getElementById('modalFooter');
+            
+            if(stepNumber === 1) {
+                titleEl.innerText = "Select Products";
+                footerEl.innerHTML = `
+                    <span id="selectedCount" style="font-weight: 600; font-size: 0.9rem;"></span>
+                    <button class="btn hover-target" id="btnNext1">Review Selection</button>
+                `;
+                updateSelectionCount();
+                document.getElementById('btnNext1').addEventListener('click', () => goToStep(2));
+            } 
+            else if (stepNumber === 2) {
+                titleEl.innerText = "Review Selection";
+                renderReviewList();
+                footerEl.innerHTML = `
+                    <button class="btn outline hover-target" id="btnBack1">Add More</button>
+                    <button class="btn hover-target" id="btnNext2">Proceed to Generate</button>
+                `;
+                document.getElementById('btnBack1').addEventListener('click', () => goToStep(1));
+                document.getElementById('btnNext2').addEventListener('click', () => {
+                    if(selectedCatalogItems.size > 0) goToStep(3);
+                });
+            }
+            else if (stepNumber === 3) {
+                titleEl.innerText = "Final Details";
+                footerEl.innerHTML = `
+                    <button class="btn outline hover-target" id="btnBack2">Back</button>
+                    <button class="btn hover-target" id="btnGenerate">Download PDF</button>
+                `;
+                document.getElementById('btnBack2').addEventListener('click', () => goToStep(2));
+                document.getElementById('btnGenerate').addEventListener('click', generatePDF);
+            }
+        }
+
+        function renderReviewList() {
+            const list = document.getElementById('reviewList');
+            list.innerHTML = '';
+            
+            if(selectedCatalogItems.size === 0) {
+                list.innerHTML = `<p>No items selected.</p>`;
+                return;
+            }
+
+            allProducts.filter(p => selectedCatalogItems.has(p.id)).forEach(p => {
+                const item = document.createElement('div');
+                item.className = 'review-item';
+                item.innerHTML = `
+                    <img src="${p.img}" alt="${p.title}">
+                    <div class="review-item-details">
+                        <h4>${p.title}</h4>
+                        <p>${p.primaryCat}</p>
+                    </div>
+                    <button class="remove-btn hover-target" data-id="${p.id}">Remove</button>
+                `;
+                list.appendChild(item);
+            });
+
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    selectedCatalogItems.delete(e.target.dataset.id);
+                    renderReviewList(); 
+                });
+            });
+        }
+
+        // ===============================================
+        // PDF GENERATION (JSPDF)
+        // ===============================================
+        const getBase64ImageFromURL = (url) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = img.width; canvas.height = img.height;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0);
+                    resolve(canvas.toDataURL("image/jpeg", 0.8));
+                };
+                img.onerror = error => reject(error);
+                img.src = url;
+            });
         };
+
+        async function generatePDF() {
+            const clientNameInput = document.getElementById('clientName');
+            if(!clientNameInput.value.trim()) {
+                clientNameInput.focus();
+                alert("Please enter the client's name.");
+                return;
+            }
+
+            const btn = document.getElementById('btnGenerate');
+            const originalText = btn.innerText;
+            btn.innerText = "Compiling PDF...";
+            btn.disabled = true;
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                const accentColor = [184, 151, 104];
+                const textColor = [17, 17, 17];
+                const grayColor = [102, 102, 102];
+
+                const logoUrl = 'https://res.cloudinary.com/dqnrbibhi/image/upload/v1774089659/Screenshot_2026-03-21_at_4.10.42_PM_atnavk.png';
+                try {
+                    const logoBase64 = await getBase64ImageFromURL(logoUrl);
+                    doc.addImage(logoBase64, 'PNG', 75, 15, 60, 20); 
+                } catch(e) { console.warn("Could not load logo", e); }
+
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(18);
+                doc.setTextColor(...textColor);
+                doc.text("PREMIUM WHOLESALE COLLECTION", 105, 50, { align: "center" });
+
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(12);
+                doc.setTextColor(...grayColor);
+                doc.text(`Prepared Exclusively For: ${clientNameInput.value.trim()}`, 105, 60, { align: "center" });
+                
+                const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                doc.setFontSize(10);
+                doc.setTextColor(...accentColor);
+                doc.text(`Date: ${dateStr}`, 105, 67, { align: "center" });
+
+                doc.setDrawColor(...accentColor);
+                doc.setLineWidth(0.5);
+                doc.line(20, 75, 190, 75);
+
+                const selectedList = allProducts.filter(p => selectedCatalogItems.has(p.id));
+                let cursorY = 85;
+                const marginX = 20;
+                const colWidth = 50;
+                const gap = 10;
+                const maxCols = 3;
+                let col = 0;
+
+                for (let i = 0; i < selectedList.length; i++) {
+                    const prod = selectedList[i];
+                    
+                    if (cursorY + 70 > 280) { 
+                        doc.addPage();
+                        cursorY = 20;
+                        col = 0;
+                    }
+
+                    const xPos = marginX + (col * (colWidth + gap));
+                    
+                    try {
+                        const imgBase64 = await getBase64ImageFromURL(prod.img);
+                        doc.addImage(imgBase64, 'JPEG', xPos, cursorY, colWidth, colWidth);
+                    } catch(e) {
+                        doc.setFillColor(244, 244, 244);
+                        doc.rect(xPos, cursorY, colWidth, colWidth, 'F');
+                    }
+
+                    doc.setFontSize(9);
+                    doc.setFont("helvetica", "bold");
+                    doc.setTextColor(...textColor);
+                    
+                    const splitTitle = doc.splitTextToSize(prod.title, colWidth);
+                    doc.text(splitTitle, xPos, cursorY + colWidth + 6);
+                    
+                    doc.setFontSize(8);
+                    doc.setFont("helvetica", "normal");
+                    doc.setTextColor(...accentColor);
+                    doc.text(prod.primaryCat.toUpperCase(), xPos, cursorY + colWidth + 6 + (splitTitle.length * 4));
+
+                    col++;
+                    if (col >= maxCols) {
+                        col = 0;
+                        cursorY += colWidth + 25;
+                    }
+                }
+
+                doc.setFontSize(8);
+                doc.setTextColor(...grayColor);
+                doc.text("www.bhaktidecor.com | hello@bhaktidecor.com", 105, 290, { align: "center" });
+
+                doc.save(`Bhakti_Decor_Catalog_${clientNameInput.value.replace(/\s+/g, '_')}.pdf`);
+                
+                btn.innerText = "Downloaded!";
+                setTimeout(() => {
+                    modalOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                    selectedCatalogItems.clear(); 
+                    goToStep(1);
+                    renderModalGrid(allProducts); // reset grid visually
+                    document.getElementById('catalogSearch').value = '';
+                    document.getElementById('catalogCategoryFilter').value = 'All';
+                }, 2000);
+
+            } catch(e) {
+                console.error("PDF Generation Error: ", e);
+                alert("An error occurred generating the PDF. Check console.");
+                btn.innerText = "Error. Try Again.";
+                btn.disabled = false;
+            }
+        }
+
+        // ===============================================
+        // PAGE LOAD
+        // ===============================================
+        document.addEventListener('DOMContentLoaded', loadProducts);
 
         window.toggleMenu = function () {
             document.getElementById('mobileOverlay').classList.toggle('active');
             document.body.style.overflow = document.body.style.overflow === 'hidden' ? 'auto' : 'hidden';
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            loadProducts();
-            attachCursorHover();
-        });
-
-        // GSAP Header Reveal
         gsap.registerPlugin(ScrollTrigger);
         gsap.fromTo('.gs-reveal', { autoAlpha: 0, y: 40 }, { duration: 1.2, autoAlpha: 1, y: 0, ease: "power4.out", delay: 0.2 });
 
-        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-        requestAnimationFrame(raf);
     </script>
 </body>
-
-</html> -->
+</html>
